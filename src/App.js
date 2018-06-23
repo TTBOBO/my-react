@@ -27,7 +27,7 @@ class App extends Component {
 					{this.props.children}
 				</main>
 				{/* {this.props.children} */}
-				<Tabbar history={this.props.history}></Tabbar>
+				<Tabbar></Tabbar>
 			</div>
 		)
 	}

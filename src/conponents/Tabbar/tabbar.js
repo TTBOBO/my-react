@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
+import {withRouter} from 'react-router-dom'
 import './baritem.css';
+@withRouter
 class tabbar extends Component {
     constructor(props) {
         super(props);

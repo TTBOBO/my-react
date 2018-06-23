@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Navbar from '../../conponents/navbar/navBar';
 class home extends Component {
     constructor(props) {
         super(props);
@@ -9,9 +9,14 @@ class home extends Component {
     
 
     render() {
+        const navbar = {
+            mode:"dark",
+            title:"首页",
+            ltype:"left"
+        }
         return (
             <div>
-                首页12
+                <Navbar option={navbar}></Navbar>
             </div>
         );
     }

@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
-import {Button} from 'antd-mobile';
-import {BrowserRouter as Router, Route, Switch, Redirect, NavLink ,Link } from "react-router-dom"
-class cart extends Component {
+import Navbar from '../../conponents/navbar/navBar';
+import { NavBar, Icon } from 'antd-mobile';
+class Cart extends Component {
     constructor(props) {
         super(props);
 
     }
 
-    goHome(){
-        this.props.history.push({
-            pathname:"home"
-        })
+    handClick(){
+        console.log(11111)
     }
 
     render() {
+        const navbar = {
+            mode:"dark",
+            title:"购物车",
+            ltype:"",
+            rightContent:[]  //<Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={() => this.handClick()} />
+        }
         return (
             <div>
-                购物车
-                <Button onClick={() => this.goHome()}>点击跳转</Button>
-                {/* <Link to="/home" onClick={() => this.goHome()}>点击</Link> */}
+                <Navbar option={navbar} goBack={() => {console.log(1)}}></Navbar>
             </div>
         );
     }
 }
 
 
-
-export default cart;
+export default Cart;
