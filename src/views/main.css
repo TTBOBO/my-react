@@ -1,0 +1,11 @@
+.app-view{
+    width: 100%;
+    height: calc(100% - 50px);
+    background: red;
+    position: absolute;
+    top: 0;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}

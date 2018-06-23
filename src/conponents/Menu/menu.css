@@ -1,0 +1,7 @@
+.menu{
+    width: 200px;
+}
+
+.el-menu-item-group__title{
+    padding-top: 0;
+}
