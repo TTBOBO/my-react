@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch, Redirect, HashRouter} from 'react-router-dom';
-import {routes ,loyoutRouterMap ,otherRouterMap} from './config';
+import {loyoutRouterMap ,otherRouterMap} from './config';
 import App from '../App';
 
 const renderRouteComponent = routes => routes.map((route, index) => {
@@ -35,6 +35,7 @@ class index extends Component {
                                                 return (
                                                     <Switch>
                                                         {loyoutRouter}
+                                                        {otherRouter}
                                                         <Redirect from="*" to="/cart" />
                                                     </Switch>
                                                 )

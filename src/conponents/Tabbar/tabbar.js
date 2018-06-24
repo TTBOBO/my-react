@@ -46,7 +46,11 @@ class tabbar extends Component {
         this.setState({
             selectedTab: key,
         });
-        this.props.history.push(key);
+        if(this.props.history.location.pathname != key){
+            this.props.history.push(key);
+        }
+        // console.log()
+        
     }
 
 

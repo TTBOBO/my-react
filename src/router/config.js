@@ -23,6 +23,13 @@ export const loyoutRouterMap = [
     }
 ];
 
-export const otherRouterMap = [];
+export const otherRouterMap = [
+    {
+        path:"/login",
+        name:"登录",
+        exact:true,
+        component:_import_views("login")
+    },
+];
 
 export const routes = loyoutRouterMap.concat(otherRouterMap);

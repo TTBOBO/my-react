@@ -6,13 +6,11 @@ class home extends Component {
 
     }
 
-    
-
     render() {
         const navbar = {
             mode:"dark",
             title:"首页",
-            ltype:"left"
+            ltype:""
         }
         return (
             <div>
