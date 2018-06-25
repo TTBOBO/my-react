@@ -17,16 +17,14 @@ class Main extends Component {
     }
 
     changeBar(name){
-        console.log(name)
         this.setState({
             routeLike:name
         })
-        console.log(this.state)
     }
     render() {
         return (
             <Provider store={store}>
-            <Router>
+            <Router />
             {/* <div>
                 <div className="app-view">
                     <Switch>
@@ -37,7 +35,6 @@ class Main extends Component {
                 </div>
                 <Tabbar history={this.state.history} changeBar={this.changeBar.bind(this)}></Tabbar>
             </div> */}
-            </Router>
             </Provider>
         );
     }

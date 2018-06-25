@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../conponents/navbar/navBar';
+import Scroll from '../../conponents/Scroll/Scroll'
 // import { NavBar, Icon } from 'antd-mobile';
 class Cart extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Cart extends Component {
         return (
             <div>
                 <Navbar option={navbar} goBack={() => {console.log(1)}}></Navbar>
+                <Scroll></Scroll>
             </div>
         );
     }

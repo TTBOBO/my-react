@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.2.0",
+    "better-scroll": "^1.12.1",
     "element-react": "^1.4.19",
     "element-theme-default": "^1.4.13",
     "react": "^16.4.1",

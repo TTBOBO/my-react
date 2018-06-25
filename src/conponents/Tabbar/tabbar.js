@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
 import {withRouter} from 'react-router-dom'
+import connect from '../../store/connnect'
 import './baritem.css';
+@connect
 @withRouter
 class tabbar extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
             barList: this.props.barList || [{
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
@@ -49,11 +51,10 @@ class tabbar extends Component {
         if(this.props.history.location.pathname != key){
             this.props.history.push(key);
         }
-        // console.log()
-        
+        this.props.login("LOGIN",121);
     }
     componentWillMount (){
-        console.log(this.props.location.pathname);
+        // console.log(this.props.location.pathname);
     }
 
 
