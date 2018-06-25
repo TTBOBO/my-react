@@ -29,12 +29,10 @@ class index extends Component {
         }
     }
     getResult(res){
-        console.log(res)
         if(res.isLogin){
             Toast.info("请登录再操作",2,null,false);
-            console.log(this.props)
             this.props.history.push('/login')
-            return false;
+            // return false;
         }
     }
     

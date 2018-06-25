@@ -10,17 +10,10 @@ const renderRouteComponent = routes => routes.map((route, index) => {
 const loyoutRouter = renderRouteComponent(loyoutRouterMap);
 const otherRouter = renderRouteComponent(otherRouterMap);
 
-
 class index extends Component {
     constructor(props) {
         super(props);
-
     }
-
-    componentDidMount(){
-        console.log()
-    }
-
     render() {
         return (
             <div>
@@ -28,20 +21,21 @@ class index extends Component {
                     <Route render={(location,history) => {
                         return (
                             <div style={{width:'100%',height:'100%'}}>
-                                <Route render={ props => {
-                                    return <App {...props} >
-                                            <Route render={() => {
-                                                
-                                                return (
-                                                    <Switch>
-                                                        {loyoutRouter}
-                                                        {otherRouter}
-                                                        <Redirect from="*" to="/cart" />
-                                                    </Switch>
-                                                )
-                                            }}/>
-                                    </App >
-                                }} />
+                                <Switch>
+                                    {otherRouter}
+                                    <Route render={ props => {
+                                        return <App {...props} >
+                                                <Route render={() => {
+                                                    return (
+                                                        <Switch>
+                                                            {loyoutRouter}
+                                                            <Redirect from="*" to="/" />
+                                                        </Switch>
+                                                    )
+                                                }}/>
+                                        </App >
+                                    }} />
+                                </Switch>
                             </div>
                         )
                     }}> 

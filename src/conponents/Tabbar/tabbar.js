@@ -52,7 +52,9 @@ class tabbar extends Component {
         // console.log()
         
     }
-
+    componentWillMount (){
+        console.log(this.props.location.pathname);
+    }
 
 
     render(children) {
