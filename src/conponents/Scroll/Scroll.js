@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from "react-dom"
 import BScroll from 'better-scroll'
 
 class Scroll extends Component {
@@ -8,16 +9,17 @@ class Scroll extends Component {
     }
 
     componentDidMount(){
-        console.log(this.$refs)
+        this.scrollView = ReactDOM.findDOMNode(this.refs.scroll);
+        console.log(this.scrollView);
+        console.log(this.refs)
     }
 
     render() {
         return (
             <div >
-                <div ref="name">
-                123123131231233
+                <div ref="scroll">
+
                 </div>
-                   
             </div>
         );
     }

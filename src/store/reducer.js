@@ -21,7 +21,6 @@ function getloginStatus(loginStatus = state.loginStatus,action){
 	
 	switch (action.type) {
 		case type.LOGIN:
-				console.log(111)
 				state.loginInfo = action.params;
 				return state.loginInfo;
 		default:

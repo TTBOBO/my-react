@@ -9,7 +9,7 @@ class Cart extends Component {
     }
 
     handClick(){
-        console.log(11111)
+        
     }
 
     render() {
