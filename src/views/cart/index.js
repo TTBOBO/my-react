@@ -20,9 +20,11 @@ class Cart extends Component {
             rightContent:[]  //<Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={() => this.handClick()} />
         }
         return (
-            <div>
+            <div style={{height:'100%'}}>
                 <Navbar option={navbar} goBack={() => {console.log(1)}}></Navbar>
-                <Scroll></Scroll>
+                <Scroll>
+                    
+                </Scroll>
             </div>
         );
     }

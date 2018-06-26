@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from "react-dom"
 import BScroll from 'better-scroll'
 import './scroll.css'
-import { fastest } from 'sw-toolbox';
+import { Icon } from 'antd-mobile';
 
 class Scroll extends Component {
     constructor(props) {
@@ -12,12 +12,13 @@ class Scroll extends Component {
             isPullUpLoad: false,
             beforePullDown: true,
             isPullingDown: false,
-            pullDownStyle: {top:"0px"},
+            pullDownStyle: { top: "-50px" },
             bubbleY: 0,
             beforeTxt: "下拉刷新",
             refreshTxt: "加载完成",
             data: [1, 2, 3, 4],
-            pullDownInitTop: -50
+            pullDownInitTop: -50,
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
         }
     }
 
@@ -30,27 +31,20 @@ class Scroll extends Component {
         if (!this.Wrapper) {
             return false;
         }
-
-        if (this.refs.Wrapper && (this.props.pullDownRefresh || this.props.pullUpLoad)) {
+        if (this.Wrapper && (this.props.pullDownRefresh || this.props.pullUpLoad)) {
             //+1  超出屏幕最大高度才会有效果      this.header  当有顶部时
-            if (this.header) {
-                this.refs.Wrapper.style.height = (this.refs.Wrapper.parentNode.parentNode.clientHeight - 40) + "px";
-                this.refs.scrollList.style.minHeight = (this.refs.Wrapper.parentNode.parentNode.clientHeight - 39) + "px";
-            } else if (this.curHeight) {   //当容器自定义高度时  需传一个高度进来
-                this.refs.Wrapper.style.height = (this.refs.Wrapper.parentNode.parentNode.clientHeight - this.curHeight) + "px";
-                this.refs.scrollList.style.minHeight = (this.refs.Wrapper.parentNode.parentNode.clientHeight - this.curHeight + 1) + "px";
+            if (this.props.header) { 
+                // return false;
+                this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - 45) + "px";
+                this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - 44) + "px";
+            } else if (this.props.curHeight) {   //当容器自定义高度时  需传一个高度进来
+                this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight) + "px";
+                this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight + 1) + "px";
             } else {
-                this.refs.Wrapper.style.height = (this.refs.Wrapper.parentNode.parentNode.clientHeight) + "px";
-                this.refs.scrollList.style.minHeight = (this.refs.Wrapper.parentNode.parentNode.clientHeight + 1) + "px";
+                this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight) + "px";
+                this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight +1) + "px";
             }
-
-
-
-            //全屏时代码
-            //this.refs.scrollList.style.minHeight = `{util.bounce.getRect(this.refs.Wrapper).height + 1}px`;
         }
-        console.log(this.props)
-        console.log(this.Wrapper)
         let option = {
             scrollY: true,
             click: this.props.click,
@@ -64,16 +58,78 @@ class Scroll extends Component {
             pullUpLoad: this.props.pullUpLoad
         };
         this.scroll = new BScroll(this.Wrapper, option);
-        console.log(this.scroll);
+        if (this.props.pullDownRefresh) {
+            this._initPullDownRefresh();
+        }
+        if (this.props.pullUpLoad) {
+            this._initPullUpLoad();
+        }
+    }
+
+
+
+    _initPullDownRefresh() {
+        this.scroll.on("pullingDown", () => {
+            this.setState({
+                beforePullDown: false,
+                isPullingDown: true
+            })
+            this.initPage();
+            setTimeout(() => {
+                this.forceUpdate(true);
+            }, 300)
+        })
+
+        this.scroll.on("scroll", pos => {
+            this.setState({
+                beforeTxt: parseInt(pos.y) > this.props.pullDownRefresh.threshold ? "释放刷新" : "下拉刷新"
+            })
+
+            if (this.props.beforePullDown) {
+                // this.props.bubbleY = Math.max(0, pos.y + this.pullDownInitTop);
+                this.setState({
+                    bubbleY: Math.max(0, pos.y + this.pullDownInitTop)
+                })
+                this.setState({
+                    pullDownStyle: { top: Math.min(pos.y + this.pullDownInitTop, 10) + 'px' }
+                });
+            } else {
+                this.setState({
+                    bubbleY: 0
+                })
+            }
+            this.setState({
+                pullDownStyle: { top: (10 - (this.props.pullDownRefresh.stop - pos.y)) + 'px' }
+            });
+        });
+
+
+
+        //设置每个scroll的  scrollTop
+        this.scroll.on('scrollEnd', pos => {
+            // this.globel.newsList[this.globel.currentPage].scrollTop = pos.y;
+        })
     }
 
     _initPullUpLoad() {
         this.scroll.on("pullingUp", () => {
-            this.state.isPullUpLoad = true;
+            this.setState({
+                isPullUpLoad: true
+            })
             // this.$emit("pullingUp");
             if (!this.props.isNoMore) {
-                this.props.pageObj.page += 1;
-                this.initPage(this.props.pageObj.page);
+                // this.props.pageObj.page += 1;
+                let _arr = JSON.parse(JSON.stringify(this.state.arr));
+                for (var i = 0; i < 10; i++) {
+                    _arr.push(i);
+                }
+                setTimeout(() => {
+                    this.setState({
+                        arr: _arr
+                    })
+                    this.forceUpdate(true);
+                }, 300)
+                // this.initPage(this.props.pageObj.page);
             } else {
                 setTimeout(() => {
                     this.forceUpdate(true);
@@ -84,21 +140,23 @@ class Scroll extends Component {
 
     initPage(page) {
         this.props.pageObj.page = page ? page : 1;
-        this.$emit("loadMore", this.props.pageObj);
+        // this.$emit("loadMore", this.props.pageObj);
     }
     forceUpdate(dirty) {
         if (this.props.pullDownRefresh && this.state.isPullingDown) {
-            this.state.isPullingDown = false;
+            this.setState({
+                isPullingDown: false
+            })
             this._reboundPullDown().then(() => {
                 this._afterPullDown();
             });
-        } else if (this.state.pullUpLoad && this.props.isPullUpLoad) {
-            this.props.isPullUpLoad = false;
+        } else if (this.props.pullUpLoad && this.state.isPullUpLoad) {
+            this.setState({
+                isPullUpLoad: false
+            })
             this.scroll.finishPullUp();
-            /**必须DOM生成完才能执行refresh  否则会出现scroll 出现异常   */
             this.refresh();
         } else {
-            /**必须DOM生成完才能执行refresh  否则会出现scroll 出现异常   */
             this.refresh();
         }
     }
@@ -113,9 +171,10 @@ class Scroll extends Component {
     }
     _afterPullDown() {
         setTimeout(() => {
-            this.state.pullDownStyle = {top:this.state.pullDownInitTop+'px'};
-            this.state.beforePullDown = true;
-            /**必须DOM生成完才能执行refresh  否则会出现scroll 出现异常   */
+            this.setState({
+                pullDownStyle: { top: this.state.pullDownInitTop + 'px' },
+                beforePullDown: true
+            })
             this.refresh();
         }, 100);
     }
@@ -125,93 +184,71 @@ class Scroll extends Component {
     handClick(index) {
         console.log(index);
     }
-
-    _initPullUpLoad() {
-        this.scroll.on("pullingUp", () => {
-            this.state.isPullUpLoad = true;
-            // this.$emit("pullingUp");
-            if (!this.props.isNoMore) {
-                this.props.pageObj.page += 1;
-                this.initPage(this.props.pageObj.page);
-            } else {
-                setTimeout(() => {
-                    this.forceUpdate(true);
-                }, 300)
-            }
-        });
-    }
-
     getpullDown() {
-        return (<div name="pulldown"
-            pullDownRefresh={this.props.pullDownRefresh}
-            pullDownStyle={this.state.pullDownStyle}
-            beforePullDown={this.state.beforePullDown}
-            isPullingDown={this.state.isPullingDown}
-            bubbleY={this.state.bubbleY}
-        >
-            {this.getpullDownCon()}
-        </div>)
+        return (<div style={this.state.pullDownStyle}>{this.getpullDownCon()} </div>)
     }
 
-    getUp(){
-        {/* <!-- 上拉加载 --> */}
-        return (
-            //name="pullup"
-            <div 
-                // pullUpLoad={this.props.pullUpLoad}
-                // isPullUpLoad={this.state.isPullUpLoad}
-                >
+    getUp() {
+        {/* <!-- 上拉加载 --> */ }
+        if (this.props.pullUpLoad) {
+            return (
+                <div className="pullup-wrapper">
                 {
-                    this.props.pullUpLoad ? <div className="before-trigger"><span>123</span></div> : <div className="after-trigger"><loading></loading> </div> 
+                    !this.state.isPullUpLoad ? <div className="before-trigger"><span>{this.gettext()}</span></div> : <div className="after-trigger"><Icon type="loading" /> </div>
                 }
-                
             </div>)
+        }
     }
-    // <div class="pullup-wrapper" v-if="pullUpLoad">
-    //                 <div class="before-trigger" v-if="!isPullUpLoad">
-    //                     <span>{{pullUpTxt}}</span>
-    //                 </div>
-    //                 <div class="after-trigger" v-else>
-    //                     {/* <!-- 加载中 --> */}
-    //                     <loading></loading>
-    //                 </div>
-    //             </div>
+
+    gettext() {
+        const moreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.more;
+        const noMoreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.noMore;
+        return this.state.pullUpDirty ? moreTxt : noMoreTxt;
+    }
+
+    //反向设置  数据有无更多数据
+    isNoMore() {
+        this.setState({pullUpDirty:!this.state.pullUpDirty});
+    }
 
 
     getpullDownCon() {
         if (this.props.pullDownRefresh) {
             return (
                 <div ref="pulldown" className="pulldown-wrapper" style={this.state.pullDownStyle} >
-                    {this.state.beforePullDown ? <div className="before-trigger">{this.state.beforeTxt}</div> : (<div className="after-trigger">
-                        {this.state.isPullingDown} ? <div className="loading"><loading></loading></div> : <div><span className="refresh-txt">{this.state.refreshTxt}</span></div>
-                    </div>)}
+                    {this.state.beforePullDown ? <div className="before-trigger">{this.state.beforeTxt}</div> : this.getloadText()}
                 </div>
             )
         }
     }
 
+    getloadText() {
+
+        return (<div className="after-trigger">
+            {this.state.isPullingDown ? <div className="loading"><Icon type="loading" /></div> : <div><span className="refresh-txt">{this.state.refreshTxt}</span></div>}
+        </div>)
+    }
+
     render() {
         //onClick={() => this.handClick(index)}
-        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
         return (
-            <div >
-                <div ref="scroll" style={{ overflow: "hidden", height: "400px" }}>
+            <div style={{}}>
+                <div ref="scroll" style={{ overflow: "hidden", height: "400px", position: 'relative' }}>
                     <div className="scroll-content newsCon" id="scroll-content" >
                         <div ref="scrollList">
-                            <slot>
-                                
-                            </slot>
+                            <ul>
+                                {this.state.arr.map((item, index) => {
+                                    return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{item}</li>)
+                                })}
+                            </ul>
                         </div>
-                        {this.getUp()}
+                        {/* 上拉加载内容 */}
+                        {this.getUp()}  
                     </div>
+                    {/* 下拉刷新内容 */}
                     {this.getpullDown()}
-                    {/* <ul>
-                        {arr.map((item, index) => {
-                            return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{item}</li>)
-                        })}
-                    </ul> */}
                 </div>
-                
+
             </div>
         );
     }
