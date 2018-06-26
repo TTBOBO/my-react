@@ -31,7 +31,12 @@ class index extends Component {
     getResult(res){
         if(res.isLogin){
             Toast.info("请登录再操作",2,null,false);
-            this.props.history.push('/login')
+            this.props.history.push({
+                pathname:"/login",
+                state:{
+                    name:123
+                }
+            })
             // return false;
         }
     }

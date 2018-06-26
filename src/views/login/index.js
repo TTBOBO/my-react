@@ -6,7 +6,13 @@ class login extends Component {
 
     }
 
-    
+    componentDidMount(){
+        React.ajaxPost('ranking',{
+            type:2
+        }).then(res => {
+            console.log(res);
+        })
+    }
 
     render() {
         const navbar = {

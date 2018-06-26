@@ -8,24 +8,21 @@ class Scroll extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pullUpDirty: true,
-            isPullUpLoad: false,
+            pullUpDirty: true,   //初始化有无更多数据  true可继续刷新  false  五更多数据
+            isPullUpLoad: false,  //上拉刷新  加载状态 true  显示加载全  false  显示文字
             beforePullDown: true,
-            isPullingDown: false,
-            pullDownStyle: { top: "-50px" },
+            isPullingDown: false,  //下拉刷新  加载状态 true  显示加载全  false  显示文字
+            pullDownStyle: { top: "-50px" },  //下拉刷新文字默认显示的位置
             bubbleY: 0,
             beforeTxt: "下拉刷新",
             refreshTxt: "加载完成",
-            data: [1, 2, 3, 4],
-            pullDownInitTop: -50,
-            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+            pullDownInitTop: -50,  //刷新完文件回到原来的位子
         }
     }
 
     componentDidMount() {
         this.Wrapper = ReactDOM.findDOMNode(this.refs.scroll);
         this.initScroll();  //初始化  better-scroll
-        console.log(this.props)
     }
 
     initScroll() {
@@ -59,6 +56,7 @@ class Scroll extends Component {
             pullUpLoad: this.props.pullUpLoad
         };
         this.scroll = new BScroll(this.Wrapper, option);
+        //
         if (this.props.pullDownRefresh) {
             this._initPullDownRefresh();
         }
@@ -189,7 +187,7 @@ class Scroll extends Component {
             return (
                 <div className="pullup-wrapper">
                 {
-                    !this.state.isPullUpLoad ? <div className="before-trigger"><span>{this.gettext()}</span></div> : <div className="after-trigger"><Icon type="loading" /> </div>
+                    !this.state.isPullUpLoad ? <div className="after-trigger"><Icon type="loading" /> </div> : <div className="before-trigger"><span>{this.gettext()}</span></div>
                 }
             </div>)
         }

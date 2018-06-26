@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../../conponents/navbar/navBar';
 import Scroll from '../../conponents/Scroll/Scroll'
 import '../../conponents/Scroll/scroll.css';
+import { fastest } from 'sw-toolbox';
 // import { NavBar, Icon } from 'antd-mobile';
 class Cart extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class Cart extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <Navbar option={navbar} goBack={() => { console.log(1) }}></Navbar>
-                <Scroll ref="scroll" loadMore={(num) => this.initList(num)}>
+                <Scroll ref="scroll" loadMore={(num) => this.initList(num)} pullDownRefresh={false}>
                     <ul>
                         {this.state.arr.map((item, index) => {
                             return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{item}</li>)
