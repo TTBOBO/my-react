@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom"
 import BScroll from 'better-scroll'
-import './scroll.css'
+
 import { Icon } from 'antd-mobile';
 
 class Scroll extends Component {
@@ -25,6 +25,7 @@ class Scroll extends Component {
     componentDidMount() {
         this.Wrapper = ReactDOM.findDOMNode(this.refs.scroll);
         this.initScroll();  //初始化  better-scroll
+        console.log(this.props)
     }
 
     initScroll() {
@@ -110,7 +111,9 @@ class Scroll extends Component {
             // this.globel.newsList[this.globel.currentPage].scrollTop = pos.y;
         })
     }
-
+    test(){
+        alert(1111)
+    }
     _initPullUpLoad() {
         this.scroll.on("pullingUp", () => {
             this.setState({
@@ -119,17 +122,8 @@ class Scroll extends Component {
             // this.$emit("pullingUp");
             if (!this.props.isNoMore) {
                 // this.props.pageObj.page += 1;
-                let _arr = JSON.parse(JSON.stringify(this.state.arr));
-                for (var i = 0; i < 10; i++) {
-                    _arr.push(i);
-                }
-                setTimeout(() => {
-                    this.setState({
-                        arr: _arr
-                    })
-                    this.forceUpdate(true);
-                }, 300)
-                // this.initPage(this.props.pageObj.page);
+               
+                this.initPage(this.props.pageObj.page);
             } else {
                 setTimeout(() => {
                     this.forceUpdate(true);
@@ -140,6 +134,7 @@ class Scroll extends Component {
 
     initPage(page) {
         this.props.pageObj.page = page ? page : 1;
+        this.props.loadMore(111)
         // this.$emit("loadMore", this.props.pageObj);
     }
     forceUpdate(dirty) {
@@ -207,7 +202,7 @@ class Scroll extends Component {
     }
 
     //反向设置  数据有无更多数据
-    isNoMore() {
+    setNoMore() {
         this.setState({pullUpDirty:!this.state.pullUpDirty});
     }
 
@@ -236,11 +231,7 @@ class Scroll extends Component {
                 <div ref="scroll" style={{ overflow: "hidden", height: "400px", position: 'relative' }}>
                     <div className="scroll-content newsCon" id="scroll-content" >
                         <div ref="scrollList">
-                            <ul>
-                                {this.state.arr.map((item, index) => {
-                                    return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{item}</li>)
-                                })}
-                            </ul>
+                            {this.props.children}
                         </div>
                         {/* 上拉加载内容 */}
                         {this.getUp()}  
@@ -276,7 +267,7 @@ Scroll.defaultProps = {
     startY: 0,
     momentum: true,
     isNoMore: false,
-    header: false,
+    header: true,
     curHeight: 0
 }
 
