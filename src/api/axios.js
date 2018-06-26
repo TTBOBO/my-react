@@ -6,7 +6,6 @@ import otherurl from './otherurl';
 
 
 axios.defaults.timeout = 5000;
-//api.isxuan.com  http://api.isxuan.com/   http://hyhapi.52qingqiyun.com
 axios.defaults.baseURL = otherurl.payurl;//http://123.207.114.48:86
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';

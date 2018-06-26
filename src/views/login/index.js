@@ -7,8 +7,9 @@ class login extends Component {
     }
 
     componentDidMount(){
-        React.ajaxPost('ranking',{
-            type:2
+        React.ajaxPost('get_channel',{
+            username:15308498888,
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
         }).then(res => {
             console.log(res);
         })
