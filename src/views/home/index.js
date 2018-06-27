@@ -12,6 +12,7 @@ class home extends Component {
 
     componentDidMount() {
         this.initScroll();
+        console.log(this.props);
     }
 
     componentWillMount() {
@@ -24,8 +25,7 @@ class home extends Component {
             username: 15308498888,
             token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
         }).then(res => {
-            let arr = [...res.data, ...res.data, ...res.data, ...res.data];
-            utils.setLocalStorage("data", JSON.stringify(res.data))
+            let arr = [...res.data];
             this.setState({
                 banner: arr
             })
@@ -55,8 +55,13 @@ class home extends Component {
                             return (<li key={index}>{item.name}</li>)
                         })}
                     </ul>
+                    
                 </div>
-                <div className="bottomWrapper container"></div>
+                <div className="bottomWrapper container">
+                <div ref="newCon" >
+                        
+                </div>
+                </div>
 
             </div>
         );
