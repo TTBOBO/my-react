@@ -1,5 +1,5 @@
 const outUrl = {
-    payurl:"",   
+    payurl:"http://news.isxuan.com",   
     infourl:""   //手机端详情   
 
 }
