@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Navbar from '../../conponents/navbar/navBar';
 import Scroll from '../../conponents/Scroll/Scroll'
 import '../../conponents/Scroll/scroll.css';
-import { fastest } from 'sw-toolbox';
 // import { NavBar, Icon } from 'antd-mobile';
 class Cart extends Component {
     constructor(props) {

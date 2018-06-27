@@ -11,9 +11,7 @@ const loyoutRouter = renderRouteComponent(loyoutRouterMap);
 const otherRouter = renderRouteComponent(otherRouterMap);
 
 class index extends Component {
-    constructor(props) {
-        super(props);
-    }
+    
     render() {
         return (
             <div>

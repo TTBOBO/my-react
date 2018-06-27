@@ -9,9 +9,13 @@
 # production
 /build
 
+<<<<<<< HEAD
 /api
 
 .otherurl.js
+=======
+/src/api/otherurl.js
+>>>>>>> dad111528e7fc039fcb941926a54c8a3859fac40
 
 # misc
 .DS_Store
