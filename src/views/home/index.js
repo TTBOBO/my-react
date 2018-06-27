@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navbar from '../../conponents/navbar/navBar';
 import BScroll from 'better-scroll'
+import utils from '../../assets/js/util'
 import './index.css'
 class home extends Component {
     constructor(props) {
@@ -10,28 +10,32 @@ class home extends Component {
         }
     }
 
-    componentDidMount(){
-        this.initBanner();
-        
+    componentDidMount() {
+        this.initScroll();
     }
 
-    initBanner(){
-        React.ajaxPost('get_channel',{
-            username:15308498888,
-            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
+    componentWillMount() {
+        this.initBanner();
+    }
+
+
+    initBanner() {
+        React.ajaxPost('get_channel', {
+            username: 15308498888,
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
         }).then(res => {
-            let arr = [...res.data,...res.data,...res.data,...res.data];
-            console.log(arr)
+            let arr = [...res.data, ...res.data, ...res.data, ...res.data];
+            utils.setLocalStorage("data", JSON.stringify(res.data))
             this.setState({
-                banner:arr
+                banner: arr
             })
-            setTimeout(() => {
-                this.initScroll();
-            },1000)
+            this.initScroll();
         })
     }
 
-    initScroll(){
+    initScroll() {
+        this.children = this.refs.ul.children;
+        this.refs.ul.style.width = this.state.banner.length * 60 + "px";
         this.scroll = new BScroll(this.refs.topWrapper, {
             scrollX: true,
             scrollY: false,
@@ -40,25 +44,16 @@ class home extends Component {
             click: true,
             eventPassthrough: "vertical"
         });
-        this.children = this.refs.ul.children;
-        let width = 0;
-        this.refs.ul.style.width = this.state.banner.length * 0.6 + "rem";
     }
 
     render() {
-        const navbar = {
-            mode:"dark",
-            title:"首页",
-            ltype:""
-        }
         return (
             <div>
-                {/* <Navbar option={navbar}></Navbar> */}
                 <div className="topWrapper" ref="topWrapper">
-                    <ul  ref="ul">
-                       {this.state.banner.map((item,index) => {
-                           return (<li key={index}>{item.name}</li>)
-                       })}
+                    <ul ref="ul">
+                        {this.state.banner.map((item, index) => {
+                            return (<li key={index}>{item.name}</li>)
+                        })}
                     </ul>
                 </div>
                 <div className="bottomWrapper container"></div>

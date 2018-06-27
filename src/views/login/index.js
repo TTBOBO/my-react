@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../conponents/navbar/navBar';
 class login extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     componentDidMount(){
         React.ajaxPost('get_channel',{

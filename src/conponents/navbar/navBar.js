@@ -4,9 +4,7 @@ import { NavBar, Icon } from 'antd-mobile';
 import './navbar.css'
 @withRouter
 class navBar extends Component {
-    constructor(props) {
-        super(props);
-    }
+    
     goBack(){
         //navBar 左边存在时，执行返回，如父组件存在回调即回调父组件
         if(this.props.option.ltype && this.props.option.ltype == 'left'){
