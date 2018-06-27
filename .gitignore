@@ -9,6 +9,10 @@
 # production
 /build
 
+/api
+
+.otherurl.js
+
 # misc
 .DS_Store
 .env.local
