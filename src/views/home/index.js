@@ -137,6 +137,16 @@ class home extends Component {
         // this.initPage(objList);
     }
 
+    getList(){
+        console.log(this.state.currentPage)
+        React.ajaxPost('news', {
+            type: this.props.getChannel[this.state.currentPage],
+            page: 1
+        }).then(res => {
+            console.log(res);
+        })
+    }
+
 
     initSwiper() {
         this.state.children = this.refs.ul.children;
