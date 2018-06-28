@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from '../../conponents/navbar/navBar';
-import Scroll from '../../conponents/Scroll/Scroll'
-import '../../conponents/Scroll/scroll.css';
+import Scroll from '../Scroll/Scroll'
+import '../Scroll/scroll.css';
 // import { NavBar, Icon } from 'antd-mobile';
-class Cart extends Component {
+class ArticleList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,12 +11,11 @@ class Cart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.refs.scroll)
+        // console.log(this.refs.scroll)
         // this.initList();
     }
 
     initList(num) {
-        console.log(num);
         let _arr = JSON.parse(JSON.stringify(this.state.arr));
         for (var i = 0; i < 12; i++) {
             _arr.push(i);
@@ -47,7 +45,7 @@ class Cart extends Component {
                 <Scroll ref="scroll" loadMore={(num) => this.initList(num)} pullDownRefresh={false}>
                     <ul>
                         {this.state.arr.map((item, index) => {
-                            return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{item}</li>)
+                            return (<li className="list-item" onClick={() => this.handClick(index)} key={index}>{this.props.name +','+item}</li>)
                         })}
                     </ul>
                 </Scroll>
@@ -57,4 +55,4 @@ class Cart extends Component {
 }
 
 
-export default Cart;
+export default ArticleList;

@@ -19,15 +19,18 @@ class index extends Component {
                 thumb:"https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png",
                 title:"我的收藏",
                 Brief:"",
-                isLogin:true
+                callBack:this.getResult.bind(this),  //父组件自己事件
+                isLogin:false
             },{
                 thumb:"https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png",
                 title:"我的喜欢",
                 Brief:"",
+                // callBack:this.getResult.bind(this),  //父组件自己事件
                 isLogin:true
             }]
         }
     }
+    
     getResult(res){
         if(res.isLogin){
             Toast.info("请登录再操作",2,null,false);
@@ -37,7 +40,8 @@ class index extends Component {
                     name:123
                 }
             })
-            // return false;
+        }else{
+            Toast.info("跳转",2,null,false);
         }
     }
     

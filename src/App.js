@@ -10,6 +10,7 @@ class App extends Component {
 		this.state = {
 			value: "111"
 		}
+		
 	}
 	
 	render() {

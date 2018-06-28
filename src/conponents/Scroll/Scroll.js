@@ -225,8 +225,8 @@ class Scroll extends Component {
     render() {
         //onClick={() => this.handClick(index)}
         return (
-            <div style={{}}>
-                <div ref="scroll" style={{ overflow: "hidden", height: "400px", position: 'relative' }}>
+            <div style={{height:'100%'}}>
+                <div ref="scroll" style={{ overflow: "hidden", height: "400", position: 'relative' }}>
                     <div className="scroll-content newsCon" id="scroll-content" >
                         <div ref="scrollList">
                             {this.props.children}

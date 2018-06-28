@@ -1,7 +1,8 @@
 .topWrapper {
     width: 90%;
     padding: 0;
-    height: .25rem;
+	height: .25rem;
+	position: relative;
     overflow: hidden;
 }
 .topWrapper ul{
@@ -33,4 +34,23 @@
     width: .6rem;
     float: left;
     text-align: center;
+}
+
+.newsList {
+	float: left;
+	height: 100%;
+    position: relative;
+  }
+  .bottomWrapper{
+    width: 100%;
+    height:calc(100% - 75px);
+    overflow: hidden;
+  }
+  .bottom-line{
+	width: .3rem;
+	position: absolute;
+	height: 1px;
+	background: #5864f7;
+	bottom: 0px;
+	transition: .3s linear;
 }

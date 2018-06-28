@@ -15,11 +15,10 @@ class NavList extends Component {
         }
     }
     handClickItem(row,index){
-        console.log(row)
+        
         if(row.callBack && typeof row.callBack == 'function'){
             row.callBack(row);
         }else if(!row.callBack && row.isLigin){
-            alert(1)
             Toast.info(row.info || "请登录再操作")
         }
     }
