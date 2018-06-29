@@ -1,9 +1,10 @@
 .topWrapper {
     width: 90%;
     padding: 0;
-	height: .25rem;
+	height: .5rem;
 	position: relative;
     overflow: hidden;
+    border-bottom:  1px solid #d0d0d0
 }
 .topWrapper ul{
     width: auto;
@@ -13,13 +14,13 @@
     padding: 0;
     flex-flow: nowrap;
     margin: 0;
-    height: .25rem;
+    height: .5rem;
     position: relative;
     
 }
 
 .bottom-line{
-    width: .3rem;
+    width: .6rem;
     position: absolute;
     height: 1px;
     background: #5864f7;
@@ -29,9 +30,9 @@
 .topWrapper ul li{
     /* padding: .02rem .05rem; */
     color: #333;
-    font-size: .12rem;
-    line-height: .25rem;
-    width: .6rem;
+    font-size: .24rem;
+    line-height: .5rem;
+    width: 1.2rem;
     float: left;
     text-align: center;
 }
@@ -47,7 +48,7 @@
     overflow: hidden;
   }
   .bottom-line{
-	width: .3rem;
+	width: .6rem;
 	position: absolute;
 	height: 1px;
 	background: #5864f7;

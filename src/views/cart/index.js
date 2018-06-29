@@ -32,6 +32,7 @@ class Cart extends Component {
 
     handClick(index) {
         console.log(index);
+        
     }
 
     render() {
@@ -43,7 +44,7 @@ class Cart extends Component {
         }
         return (
             <div style={{ height: '100%' }}>
-                {/* <Navbar option={navbar} goBack={() => { console.log(1) }}></Navbar> */}
+                <Navbar option={navbar} goBack={() => { console.log(1) }}></Navbar>
                 <Scroll ref="scroll" loadMore={(num) => this.initList(num)} pullDownRefresh={false}>
                     <ul>
                         {this.state.arr.map((item, index) => {

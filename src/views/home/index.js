@@ -12,7 +12,7 @@ class home extends Component {
             banner: [],
             clickStatus: false,
             topClick: false,
-            left: 0.15,
+            left: .3,
             currentPage: 0,
             isNoMore: false
         }
@@ -47,7 +47,7 @@ class home extends Component {
 
     initScroll() {
         this.children = this.refs.ul.children;
-        this.refs.ul.style.width = this.props.getChannel.length * .6 + "rem";
+        this.refs.ul.style.width = this.props.getChannel.length * 1.2 + "rem";
         this.scroll = new BScroll(this.refs.topWrapper, {
             scrollX: true,
             scrollY: false,
@@ -95,10 +95,10 @@ class home extends Component {
 
     activeLi(index, status) {
         this.setState({
-            left: this.state.left + (index * .6),
+            left: this.state.left + (index * 1.2),
             currentPage: index
         })
-        this.left = this.left + index * 0.6;
+        this.left = this.left + index * 1.2;
         this.currentPage = index;
         let bottomWrapperWidth = this.refs.bottomWrapper.clientWidth;
         this.topClick = true;
@@ -107,16 +107,15 @@ class home extends Component {
     }
 
     getActive(index) {
-        let left = 0.15;
+        let left = 0.3;
         if (!this.state.topClick) {
            
-            left = left + index * 0.6;
+            left = left + index * 1.2;
             this.setState({
                 left: left,
                 currentPage: index
             })
         }
-        console.log(left)
         let bottomWrapperWidth = this.refs.bottomWrapper.clientWidth;
         let maxScrollW = this.scroll.maxScrollX;
         if (left * 100 > bottomWrapperWidth / 2 && -(left * 100 - bottomWrapperWidth / 2) > maxScrollW) {
@@ -138,14 +137,37 @@ class home extends Component {
     }
 
     getList(){
-        console.log(this.state.currentPage)
-        React.ajaxPost('news', {
-            type: this.props.getChannel[this.state.currentPage],
-            page: 1
-        }).then(res => {
-            console.log(res);
-        })
+        // React.ajaxPost('news', {
+        //     type: 7,  //this.props.getChannel[this.state.currentPage].id
+        //     page: 1
+        // }).then(res => {
+        //     console.log(res);
+        // })
     }
+
+    initPage(page) {
+        this.globel.newsList[this.currentPage].objList = page ? page : 1;
+        //当下这行可忽略
+        this.globel.newsList[this.currentPage].objList.filter = "hm_archives.typeid = "+ ( (this.currentPage % 7 ) + 2);
+        this.$ajaxPost("/hmapi/article/api_article/grid", this.globel.newsList[this.currentPage].objList).then(
+          res => {
+            if(res.data.rows.length > 0 ){
+              /**给当前页新闻列表添加加载数据 */
+              this.isNoMore = false;
+              this.globel.newsList[this.currentPage].isNoMore = false;
+              this.globel.newsList[this.currentPage].objList.page == 1 ? (this.globel.newsList[this.currentPage].newList = res.data.rows)  : this.globel.newsList[this.currentPage].newList.push(...res.data.rows);
+            }else{
+              this.isNoMore = true;
+              this.globel.newsList[this.currentPage].isNoMore = true;
+              
+            }
+  
+            setTimeout(() =>{
+               this.$refs.loadMore[this.currentPage].forceUpdate(true);
+            },300)
+          }
+        );
+      }
 
 
     initSwiper() {

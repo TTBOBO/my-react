@@ -1,0 +1,198 @@
+body{
+	margin: 0;
+}
+.user-con{
+	width: 100%;
+	height: 100%;
+	background:  url('../../assets/img/blur-book-stack-books-590493.png');
+	background-repeat-y: no-repeat;
+	position: absolute;
+    background-size: contain;
+    overflow: hidden;
+}
+.mui-bar {
+	background: transparent !important;
+}
+.mui-bar-nav{
+	box-shadow: none !important; 
+}
+.mui-title {
+	color: #fff;
+}
+.mui-bar .mui-action-back{
+	line-height: 44px;
+	padding-left: .12rem;
+}
+.mui-bar .close{
+	width: .26rem;
+	
+}
+
+
+.res-q {
+    width: 100%;
+     border-radius: .4rem;
+    width: 100%;
+    height: .8rem;
+    margin-bottom: .5rem;
+    font-size: .32rem;
+    color: #333;
+    background: #f6c50b;
+    transition: none;
+}
+
+
+
+
+.login-bottom-wrap {
+    margin: 0 auto;
+    margin: 0 .46rem;
+    margin-top: 5.5rem;
+}
+.y-login-user{
+    font-size: .48rem;
+    color: #FF5F5F;
+
+}
+.login-tab-user{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    border-bottom: 0.01rem solid rgba(153, 153, 153, 1);
+}
+.wallet-header{
+    overflow: hidden;
+    width:10rem;
+height:2.57rem;
+background:rgba(55,95,129,1);
+}
+.wa-o{
+    font-size: 0.4rem;
+    color: #fff;
+    margin-top: 0.63rem;
+    margin-left: 0.64rem;
+}
+.wa-b{
+    font-size: 0.4rem;
+    color: #fff;
+    margin-top: 0.4rem;
+    margin-left: 0.64rem;
+}
+.y-font{
+    font-size:0.37rem;
+    color:rgba(51,51,51,1);
+    text-align: center;
+    margin-top: 0.6rem;
+}
+.ul-wrap img{
+    width:1.2rem;
+    height:1.12rem;
+    border-radius: 7px;
+}
+li{
+    list-style: none;
+}
+.ul-wrap ul li{
+    float: left;
+    text-align: center;
+    margin: 0.6rem .4rem 0;
+    font-size:0.32rem;
+color:rgba(51,51,51,1);
+}
+.ul-wrap{
+    overflow: hidden;
+    /* padding: 0 0.4rem; */
+}
+.go-login{
+	font-size: 0.28rem;
+	margin-top: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	color: #f6c50b;
+	margin-bottom: .88rem;
+}
+
+.input-wrap {
+    border-radius: .4rem;
+    /* margin: 0 .46rem; */
+    height: .8rem;
+    line-height: .8rem;
+    padding-left: .41rem;
+    box-shadow: 0 .01rem .05rem 0 rgba(0,0,0,.25);
+    margin-bottom: .5rem;
+    font-size: .32rem;
+    color: #888;
+}
+#login .input-wrap{
+	 display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.go-login .forget{
+	color: #888;
+}
+.phone {
+    margin-top: 0.45rem;
+}
+
+.phone input {
+     font-size: .32rem;
+    color: #888;
+    margin-left: 0.5rem;
+    padding-left: 0 !important;
+    height: 95%;
+    background: transparent !important;
+    border: none;
+}
+input {
+	border: none;
+}
+button:enabled:active{
+	background: #f6c50b;
+	color: #333;
+}
+.sm{
+	color: #fed847;
+	font-size: .24rem;
+	text-align: center;
+	position: absolute;
+	bottom: .54rem;
+	left: 0;
+	right: 0;
+}
+#getcode{
+	min-width: .9rem;
+    text-align: center;
+    font-size: 0.32rem;
+    color: #f6c50b;
+    float: right;
+    font-size: .26rem;
+    padding-right: .35rem;
+    
+    position: relative;
+}
+
+#getcode:before{
+	content: "";
+	width: 1px;
+	left: -.2rem;
+	height: .27rem;
+	position: absolute;
+	top: .27rem;
+	background:  #888;
+}
+
+.check{
+	width: .19rem;
+	height: .19rem;
+	border: 1px solid #FED847;
+	margin-left: .15rem;
+	display: inline-block;
+}
+.is-check{
+	background: url('../../assets/img/图层6.png');
+	background-size: cover;
+}
+.user-con .am-navbar{
+    background: transparent !important;
+}

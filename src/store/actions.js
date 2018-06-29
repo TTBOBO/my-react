@@ -6,10 +6,10 @@ export function login (status,params){
 }
 
 export function get_channel (status,params){
-    // console.log({ type:type.LOGIN,status})
     return { type:type.GETCHANNEL,status,params};
 }
 
 export function setpagelist (status,params){
+   
     return { type:type.SETPAGELIST,status,params};
 }

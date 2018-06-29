@@ -17,7 +17,7 @@ class ArticleList extends Component {
 
     initList(num) {
         let _arr = JSON.parse(JSON.stringify(this.state.arr));
-        for (var i = 0; i < 12; i++) {
+        for (var i = 0; i < 10000; i++) {
             _arr.push(i);
         }
         setTimeout(() => {

@@ -32,8 +32,12 @@ function getloginStatus(loginStatus = state.loginStatus,action){
 function getChannel(channel = state.channel,action){
 	switch (action.type) {
 		case type.GETCHANNEL:
-				// dispatch()
-				state.channel = action.params;
+				let _channel = action.params;
+				_channel.forEach((item,index) => {
+					item['page'] = 1;
+					item['isNomore'] = false;
+				})
+				state.channel = _channel;
 			return state.channel;
 		default:
 			return channel;

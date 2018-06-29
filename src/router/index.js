@@ -14,7 +14,7 @@ class index extends Component {
     
     render() {
         return (
-            <div>
+            <div className="main-content">
                 <HashRouter>
                     <Route render={(location, history) => {
                         return (
