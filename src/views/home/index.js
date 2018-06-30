@@ -137,12 +137,12 @@ class home extends Component {
     }
 
     getList(){
-        // React.ajaxPost('news', {
-        //     type: 7,  //this.props.getChannel[this.state.currentPage].id
-        //     page: 1
-        // }).then(res => {
-        //     console.log(res);
-        // })
+        React.ajaxPost('news', {
+            type: 7,  //this.props.getChannel[this.state.currentPage].id
+            page: 1
+        }).then(res => {
+            console.log(res);
+        })
     }
 
     initPage(page) {
