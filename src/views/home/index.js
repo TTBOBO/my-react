@@ -31,17 +31,67 @@ class home extends Component {
 
     initBanner() {
         if (this.props.getChannel.length == 0) {
-            React.ajaxPost('get_channel', {
-                username: 15308498888,
-                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
-            }).then(res => {
-                let arr = [...res.data];
-                this.props.get_channel('GETCHANNEL', arr);
+            let arr = [
+                {
+                    "id": 1,
+                    "name": "教育",
+                    "status": 1,
+                    "create_time": "2016-12-22 18:22:24"
+                },
+                {
+                    "id": 2,
+                    "name": "娱乐",
+                    "status": 1,
+                    "create_time": "2018-06-07 15:23:01"
+                },
+                {
+                    "id": 3,
+                    "name": "财经",
+                    "status": 1,
+                    "create_time": "2018-06-07 15:23:09"
+                },
+                {
+                    "id": 4,
+                    "name": "游戏",
+                    "status": 1,
+                    "create_time": "2018-06-11 16:15:14"
+                },
+                {
+                    "id": 5,
+                    "name": "新闻",
+                    "status": 1,
+                    "create_time": "2018-06-13 15:35:32"
+                },
+                {
+                    "id": 7,
+                    "name": "科技",
+                    "status": 1,
+                    "create_time": "2018-06-13 15:39:28"
+                },
+                {
+                    "id": 6,
+                    "name": "体育",
+                    "status": 1,
+                    "create_time": "2018-06-13 15:40:34"
+                }
+            ];
+            this.props.get_channel('GETCHANNEL', arr);
+            setTimeout(() => {
                 this.initScroll(); //初始化 横向滚动栏
                 this.initSwiper(); //初始化横向滚动栏宽度
                 this.getList(); //获取栏目内容
-                console.log(this.props.getChannel)
-            })
+            },100)
+            // React.ajaxPost('get_channel', {
+            //     username: 18680341334,
+            //     token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
+            // }).then(res => {
+            //     let arr = [...res.data];
+            //     this.props.get_channel('GETCHANNEL', arr);
+            //     this.initScroll(); //初始化 横向滚动栏
+            //     this.initSwiper(); //初始化横向滚动栏宽度
+            //     this.getList(); //获取栏目内容
+            //     console.log(this.props.getChannel)
+            // })
         }
     }
 
@@ -137,12 +187,12 @@ class home extends Component {
     }
 
     getList(){
-        React.ajaxPost('news', {
-            type: 7,  //this.props.getChannel[this.state.currentPage].id
-            page: 1
-        }).then(res => {
-            console.log(res);
-        })
+        // React.ajaxPost('news', {
+        //     type: 1,  //this.props.getChannel[this.state.currentPage].id
+        //     page: 1
+        // }).then(res => {
+        //     console.log(res);
+        // })
     }
 
     initPage(page) {
@@ -191,12 +241,13 @@ class home extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <div className="topWrapper" ref="topWrapper">
-                    <ul ref="ul">
+                    <ul ref="ul" style={{position:'relative'}}>
                         {this.props.getChannel.map((item, index) => {
                             return (<li key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
                         })}
+                        <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
                     </ul>
-                    <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
+                   
                 </div>
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
