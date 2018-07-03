@@ -8,19 +8,12 @@ class ArticleList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16],
             curHeight:0
         }
         
     }
     componentDidMount() {
-       setTimeout(() => {
-        this.setState({
-            curHeight:document.getElementById("article-view").clientHeight
-        })
-        console.log(this.state.curHeight)
-       })
-        
         // this.initList();
     }
 
@@ -58,8 +51,8 @@ class ArticleList extends Component {
 
         return (
             <div style={{ height: '100%' }} id="article-view">
-                <Scroll ref="scroll" loadMore={(num) => this.initList(num)} pullDownRefresh={false} curHeight={this.state.curHeight}>
-                    <ul className="shopList" id="shopList">
+                <Scroll ref="scroll" loadMore={(num) => this.initList(num)}  curHeight={1}>
+                    <div className="shopList" id="shopList">
                         {this.state.arr.map((item, index) => {
                             return (
                             <div className="shop-list"  key={index}>
@@ -74,7 +67,7 @@ class ArticleList extends Component {
                                 </div>
                             </div>)
                         })}
-                    </ul>
+                    </div>
                 </Scroll>
 
             </div>

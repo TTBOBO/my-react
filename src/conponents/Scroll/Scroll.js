@@ -21,8 +21,10 @@ class Scroll extends Component {
     }
 
     componentDidMount() {
-        this.Wrapper = ReactDOM.findDOMNode(this.refs.scroll);
-        this.initScroll();  //初始化  better-scroll
+        this.Wrapper = this.refs.scroll;
+        setTimeout(() => {
+            this.initScroll();  //初始化  better-scroll
+        })
     }
 
     initScroll() {
@@ -37,9 +39,10 @@ class Scroll extends Component {
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - 45) + "px";
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - 44) + "px";
             } else if (this.props.curHeight) {   //当容器自定义高度时  需传一个高度进来
-               
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight) + "px";
+                console.log(this.Wrapper.parentNode.parentNode.clientHeight)
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight + 1) + "px";
+                console.log(this.refs.scrollList.style.minHeight)
             } else {
                 console.log(this.Wrapper.parentNode.parentNode.clientHeight)
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight) + "px";
@@ -225,14 +228,18 @@ class Scroll extends Component {
         </div>)
     }
 
+    
+
     render() {
         //onClick={() => this.handClick(index)}
         return (
             <div style={{height:'100%'}}>
-                <div ref="scroll" style={{ overflow: "hidden", height: "400", position: 'relative' }}>
+                <div ref="scroll" style={{ overflow: "hidden", position: 'relative' }}>
                     <div className="scroll-content newsCon" id="scroll-content" >
                         <div ref="scrollList">
-                            {this.props.children}
+                            {
+                               this.props.children
+                            }
                         </div>
                         {/* 上拉加载内容 */}
                         {this.getUp()}  

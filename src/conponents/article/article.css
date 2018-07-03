@@ -93,9 +93,7 @@
     overflow: hidden;
     width: 100%;
     background: #fff;
-    position: absolute;
-top: 0;
-/* bottom: 1rem; */
+    top: 0;
 }
 .money{
     position: absolute;

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BScroll from 'better-scroll'
 import connect from '../../store/connnect'
 import './index.css';
-import Cart from '../cart/index'
 import ArticleList from '../../conponents/article/ArticleList'
 @connect
 class home extends Component {
@@ -14,23 +13,26 @@ class home extends Component {
             topClick: false,
             left: .3,
             currentPage: 0,
-            isNoMore: false
+            isNoMore: false,
+            height:""
         }
     }
     componentDidMount() {
+        this.initBanner();
         if (this.props.getChannel.length != 0) {
-            this.initScroll();
-            this.initSwiper();
+            // this.initBanner();
+            // this.initScroll();
+            // this.initSwiper();
         }
     }
 
     componentWillMount() {
-        this.initBanner();
+       
     }
 
 
     initBanner() {
-        if (this.props.getChannel.length == 0) {
+        // if (this.props.getChannel.length == 0) {
             let arr = [
                 {
                     "id": 1,
@@ -92,7 +94,7 @@ class home extends Component {
             //     this.getList(); //获取栏目内容
             //     console.log(this.props.getChannel)
             // })
-        }
+        // }
     }
 
     initScroll() {
@@ -226,6 +228,9 @@ class home extends Component {
         let bottomWrapperHeight = this.refs.bottomWrapper.clientHeight;
         this.state.bottomHeight = bottomWrapperHeight + "px";  //设置底部容器的高度
         this.state.childrenCon = this.refs.newCon.children;
+        this.setState({
+            height:bottomWrapperHeight
+        })
         let newItemW = 0;
         let child = null;
         for (let i = 0; i < this.props.getChannel.length; i++) {
@@ -252,10 +257,11 @@ class home extends Component {
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
                         {this.props.getChannel.map((item, index) => {
-                            return (<div key={index} className="newsList" >
-                                {/* <Cart></Cart> */}
-                                <ArticleList name={'banner'+index}></ArticleList>
-                            </div>)
+                            if(this.state.height){
+                                return (<div key={index} className="newsList" >
+                                    <ArticleList name={'banner'+index} height={this.state.height} ></ArticleList>
+                                </div>)
+                            }
                         })}
                     </div>
                 </div>
