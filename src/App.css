@@ -32,3 +32,15 @@
   height: 100%;
   /* position: absolute; */
 }
+
+/**全局css设置*/
+html, body {-ms-overflow-style: scrollbar;}
+body{width:100%;margin:0;padding:0;overflow-x:hidden !important;background:#f2f2f2 !important;}
+.inline-block{display:inline-block}
+a{text-decoration:none;}
+a:hover{text-decoration:none;cursor: pointer;}
+a:active{}
+h1,h2,h3,h4,h5,h6{margin: 0}
+em{font-style:normal}
+ul,ol,li{list-style:none;border:none;padding:0;margin:0;}
+img{border:0;vertical-align:middle}
