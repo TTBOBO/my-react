@@ -33,7 +33,7 @@
 .shop-text>p:nth-child(2) {
     margin-top: 0.1rem;
     font-size: 0.24rem;
-    color: #da020c;
+    color: #949494;
     margin-bottom: 0;
 }
 
@@ -98,4 +98,21 @@
 .money{
     position: absolute;
     bottom: 0;
+}
+
+.shop-list .shop-text .tool{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+.shop-list .shop-text .tool span{
+    font-size: .32rem;
+}
+
+.shop-list .shop-text .tool .icon{
+    margin-right: .05rem;
+}
+.shop-list .shop-text .tool .num{
+    font-size: .25rem;
 }

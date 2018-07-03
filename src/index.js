@@ -5,7 +5,7 @@ import {ajaxGet,ajaxPost} from './api/axios'
 
 import App from './views/Main';
 import registerServiceWorker from './registerServiceWorker';
-
+import './assets/css/iconfont.css';
 React.ajaxGet = ajaxGet;
 React.ajaxPost = ajaxPost;
 (function (doc, win) {

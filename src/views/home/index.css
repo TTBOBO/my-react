@@ -22,10 +22,13 @@
 .bottom-line{
     width: .6rem;
     position: absolute;
-    height: 1px;
-    background: #5864f7;
+    height: 2px;
+    background: rgb(254, 225, 81);
     bottom: 0px;
     transition: .3s linear;
+}
+.top-active{
+    color: rgb(254, 225, 81) !important;
 }
 .topWrapper ul li{
     /* padding: .02rem .05rem; */
@@ -47,11 +50,3 @@
     height:calc(100% - 75px);
     overflow: hidden;
   }
-  .bottom-line{
-	width: .6rem;
-	position: absolute;
-	height: 1px;
-	background: #5864f7;
-	bottom: 0px;
-	transition: .3s linear;
-}

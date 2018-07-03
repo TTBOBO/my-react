@@ -56,6 +56,9 @@ class index extends Component {
             <div>
                 <Navbar option={navbar}></Navbar>
                 <Navlist navList={this.state.navList}></Navlist>
+                <div>
+                    <span className="icon iconfont icon-shouye"></span>
+                </div>
             </div>
         );
     }

@@ -7,7 +7,7 @@ class navBar extends Component {
     
     goBack(){
         //navBar 左边存在时，执行返回，如父组件存在回调即回调父组件
-        if(this.props.option.ltype && this.props.option.ltype == 'left'){
+        if(this.props.option.ltype && this.props.option.ltype === 'left'){
             this.props.history.goBack();
             if( this.props.goBack){
                 this.props.goBack();

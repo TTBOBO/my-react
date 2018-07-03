@@ -60,7 +60,7 @@ class ArticleList extends Component {
                                     <div className="shop-list-con">
                                         <div className="shop-text">
                                             <p className="text-ellipsis">价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按时打卡了华盛顿卡价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按时打卡了华盛顿卡时打卡了华盛顿卡</p>
-                                            <p>78944 LCB</p>
+                                            <p className="tool"> <span><span className="icon iconfont icon-xianshikejian"></span><span className="num">123</span></span><span><span className="icon iconfont icon-comment"></span><span className="num">78944</span></span></p>
                                         </div>
                                         <div><img src={require("../../assets/img/blur-book-stack-books-590493.png")} /></div>
                                     </div>

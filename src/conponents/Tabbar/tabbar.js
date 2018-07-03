@@ -14,7 +14,9 @@ class tabbar extends Component {
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
                 title: "首页",
-                key: "/"
+                key: "/",
+                icon:"icon iconfont icon-shouye",
+                selectIcon:"icon iconfont icon-shouyefill"
             },
             //  {
             //     bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
@@ -26,12 +28,16 @@ class tabbar extends Component {
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
                 title: "购物车",
-                key: "/cart"
+                key: "/cart",
+                icon:"icon iconfont icon-gouwuche",
+                selectIcon:"icon iconfont icon-gouwuchefill"
             }, {
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
                 title: "我的",
-                key: "/user"
+                key: "/user",
+                icon:"icon iconfont icon-wode11",
+                selectIcon:"icon iconfont icon-wode1"
             }],
             selectedTab: "/home",
             hidden: false
@@ -44,11 +50,11 @@ class tabbar extends Component {
         });
     }
 
-    changeBar = (key) => {
+    changeBar(key) {
         this.setState({
             selectedTab: key,
         });
-        if(this.props.history.location.pathname != key){
+        if(this.props.history.location.pathname !== key){
             this.props.history.push(key);
         }
         this.props.login("LOGIN",121);
@@ -63,7 +69,7 @@ class tabbar extends Component {
             <div className="bar-con">
                 <TabBar
                     unselectedTintColor="#949494"
-                    tintColor="#33A3F4"
+                    tintColor="#fee151"
                     barTintColor="white"
                     hidden={this.state.hidden}
                 >
@@ -71,21 +77,24 @@ class tabbar extends Component {
                         <TabBar.Item
                             title={item.title}
                             key={index}
-                            icon={<div style={{
+                            icon={<span style={{
                                 width: '22px',
                                 height: '22px',
-                                background: item.bg
+                                // background: item.bg,
                             }}
+                            className={item.icon}
                             />
                             }
-                            selectedIcon={<div style={{
+                            selectedIcon={<span style={{
                                 width: '22px',
                                 height: '22px',
-                                background: item.seBg
+                                // background: item.seBg,
+                                
                             }}
+                            className={item.selectIcon}
                             />
                             }
-                            selected={this.state.selectedTab === item.key}
+                            selected={this.state.selectedTab == item.key}
                             onPress={this.changeBar.bind(this,item.key)}
                         >
                             {/* {getLike(item.key)} */}

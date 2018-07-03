@@ -1,3 +1,6 @@
 .am-navbar-title{
     font-size: 14px;
 }
+.am-navbar{
+    background-color: #fee151 !important;
+}

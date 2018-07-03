@@ -40,11 +40,8 @@ class Scroll extends Component {
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - 44) + "px";
             } else if (this.props.curHeight) {   //当容器自定义高度时  需传一个高度进来
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight) + "px";
-                console.log(this.Wrapper.parentNode.parentNode.clientHeight)
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight + 1) + "px";
-                console.log(this.refs.scrollList.style.minHeight)
             } else {
-                console.log(this.Wrapper.parentNode.parentNode.clientHeight)
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight) + "px";
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight +1) + "px";
             }

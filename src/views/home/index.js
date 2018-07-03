@@ -94,7 +94,6 @@ class home extends Component {
             //     this.getList(); //获取栏目内容
             //     console.log(this.props.getChannel)
             // })
-        // }
     }
 
     initScroll() {
@@ -146,11 +145,12 @@ class home extends Component {
     }
 
     activeLi(index, status) {
+        let _left = this.state.left;
         this.setState({
-            left: this.state.left + (index * 1.2),
+            left: _left + (index * 1.2),
             currentPage: index
         })
-        this.left = this.left + index * 1.2;
+        // this.left = this.left + index * 1.2;
         this.currentPage = index;
         let bottomWrapperWidth = this.refs.bottomWrapper.clientWidth;
         this.topClick = true;
@@ -248,11 +248,10 @@ class home extends Component {
                 <div className="topWrapper" ref="topWrapper">
                     <ul ref="ul" style={{position:'relative'}}>
                         {this.props.getChannel.map((item, index) => {
-                            return (<li key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
+                            return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
                         })}
                         <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
                     </ul>
-                   
                 </div>
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
