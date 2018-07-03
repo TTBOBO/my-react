@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import cityList from './cityList';
 import BScroll from 'better-scroll'
+import ReactDOM from "react-dom"
 import './cityList.css';
 class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            scrollY:0,
-            letter:[],
-            currentIndex:0,  //默认选中第一个
+            scrollY: 0,
+            letter: [],
+            currentIndex: 0,  //默认选中第一个
         }
     }
 
@@ -20,17 +21,17 @@ class index extends Component {
         this.initConHeight();  //初始化滚动条最小高度
         this.getHeight();
         this.initScroll();
-        
         this.getLetter();
     }
 
-    initConHeight(){
-        let height  = this.refs.wapperList.clientHeight;
-        this.refs.content.style['min-height'] = height+1+'px';
+
+    initConHeight() {
+        let height = this.refs.wapperList.clientHeight;
+        this.refs.content.style['min-height'] = height + 1 + 'px';
     }
 
 
-    initScroll(){
+    initScroll() {
         this.Wrapper = this.refs.wapperList;
         let option = {
             scrollY: true,
@@ -44,81 +45,90 @@ class index extends Component {
         };
         this.scroll = new BScroll(this.Wrapper, option);
         this.scroll.on("scroll", pos => {
-           this.setState({
-               scrollY:pos.y
-           })
-           this.getCurrentIndex(pos.y);
+            this.setState({
+                scrollY: pos.y
+            })
+            this.getCurrentIndex(pos.y);
         });
     }
 
-    getCurrentIndex(curY){
+    getCurrentIndex(curY) {
         if (curY > -50) {
             this.setState({
-                currentIndex:0
+                currentIndex: 0
             })
             return;
         }
 
-        for(var i = 0; i < this.listheight.length; i++){
-            console.log(this.listheight[i],this.listheight[index+1],curY)
-            if(-curY > this.listheight[i] && -curY < this.listheight[i+1]){
-                console.log(i)
+        for (var i = 0; i < this.listheight.length; i++) {
+            if (-curY > this.listheight[i] && -curY < this.listheight[i + 1]) {
                 this.setState({
-                    currentIndex:i
+                    currentIndex: i
                 })
                 return false;
             }
         }
-        // this.listheight.forEach((item,index) => {
-        //     console.log(item,this.listheight[index+1],curY)
-        //     if(-curY > item && -curY < this.listheight[index+1]){
-        //         this.setState({
-        //             currentIndex:index
-        //         })
-        //         return false;
-        //     }
-        // })
     }
 
 
-    getHeight(){
+    getHeight() {
         this.listheight = [];  //初始化列表组高度的组合
         let height = 50;
         this.listheight.push(height);   //初始化  push第一个高度距离
-        for(var i in this.refs){
-            height = this.refs[i].clientHeight;
+        for (var i in this.refs) {
+            height += this.refs[i].clientHeight;
             this.listheight.push(height);
         }
-        console.log(this.listheight);
     }
 
 
     //滑动到指定位置
-    _scrollTo(index){
-
+    _scrollTo(index) {
+        console.log(index);
+        if (!index && index !== 0) {
+            return
+        }
+        if (index < 0) {
+            index = 0
+        } else if (index > this.listheight.length - 2) {
+            index = this.listheight.length - 2
+        }
+        this.scroll.scrollToElement(this.refs['listGroup'+index], 100)
+        // this.scrollY = this.$refs.indexList.scroll.y
     }
 
-    getLetter(){
-        let _letter = cityList.map((item) =>{
-            return item.name.substr(0,1);
+    //获取右边的关键词
+    getLetter() {
+        let _letter = cityList.map((item) => {
+            return item.name.substr(0, 1);
         })
         this.setState({
-            letter:_letter
+            letter: _letter
         })
     }
-    
+
+
+    //右边栏touch开始
+    touchStart(e) {
+        this._scrollTo(e.target.getAttribute("data-index"))
+    }
+
+    touchMove(e) {
+
+    }
+
 
     render() {
         return (
             <div className="wapper-list" >
-                <div ref="wapperList" style={{height:"100%"}}>
+                <div ref="wapperList" style={{ height: "100%" }}>
                     <ul className="list-ul" ref="content">
-                        {cityList.map((item,index) => {
-                            return (<li key={index} ref={'listGroup'+index}>
+                        {cityList.map((item, index) => {
+                            return (<li key={index} ref={'listGroup' + index}>
                                 <h2>{item.name}</h2>
                                 <ul className="list-ul-content">
-                                    {item.cities.map((_item,_index) => {
-                                        return (<li className="list-ul-item" key={_index+'item'}>{_item.name}</li>)
+                                    {item.cities.map((_item, _index) => {
+                                        return (<li className="list-ul-item" key={_index + 'item'}>{_item.name}</li>)
                                     })}
                                 </ul>
                             </li>)
@@ -126,10 +136,10 @@ class index extends Component {
                     </ul>
                 </div>
                 <div className="letter">
-                    <ul>
+                    <ul onTouchStart={(e) => this.touchStart(e)} onTouchMove={(e) => this.touchMove(e)}>
                         {
-                            this.state.letter.map((item,index) => {
-                                return (<li key={index+''} className={this.state.currentIndex == index ? 'active' : ''}>{item}</li>)
+                            this.state.letter.map((item, index) => {
+                                return (<li key={index + ''} data-index={index} className={this.state.currentIndex == index ? 'active' : ''}>{item}</li>)
                             })
                         }
                     </ul>
