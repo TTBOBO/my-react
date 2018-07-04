@@ -77,23 +77,24 @@ class home extends Component {
                     "create_time": "2018-06-13 15:40:34"
                 }
             ];
-            this.props.get_channel('GETCHANNEL', arr);
-            setTimeout(() => {
-                this.initScroll(); //初始化 横向滚动栏
-                this.initSwiper(); //初始化横向滚动栏宽度
-                this.getList(); //获取栏目内容
-            },100)
-            // React.ajaxPost('get_channel', {
-            //     username: 18680341334,
-            //     token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
-            // }).then(res => {
-            //     let arr = [...res.data];
-            //     this.props.get_channel('GETCHANNEL', arr);
+            // this.props.get_channel('GETCHANNEL', arr);
+            // setTimeout(() => {
             //     this.initScroll(); //初始化 横向滚动栏
             //     this.initSwiper(); //初始化横向滚动栏宽度
             //     this.getList(); //获取栏目内容
-            //     console.log(this.props.getChannel)
-            // })
+            // },100)
+            React.ajaxPost('get_channel', {
+                username: 18680341334,
+                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
+            }).then(res => {
+                console.log(res);
+                let arr = [...res.data];
+                this.props.get_channel('GETCHANNEL', arr);
+                this.initScroll(); //初始化 横向滚动栏
+                this.initSwiper(); //初始化横向滚动栏宽度
+                this.getList(); //获取栏目内容
+                console.log(this.props)
+            })
     }
 
     initScroll() {
@@ -168,18 +169,16 @@ class home extends Component {
         }
         let bottomWrapperWidth = this.refs.bottomWrapper.clientWidth;
         let maxScrollW = this.scroll.maxScrollX;
-        if (left * 100 > bottomWrapperWidth / 2 && -(left * 100 - bottomWrapperWidth / 2) > maxScrollW) {
-            this.scroll.scrollTo(-(left * 100 - bottomWrapperWidth / 2), 0, 200);
-        } else if (left * 100 < bottomWrapperWidth / 2) {
+        if (this.state.left * 100 > bottomWrapperWidth  && -(this.state.left * 100 - bottomWrapperWidth ) > maxScrollW) {
+            this.scroll.scrollTo(-(this.state.left * 100 - bottomWrapperWidth ), 0, 200);
+        } else if (this.state.left * 100 < bottomWrapperWidth ) {
             this.scroll.scrollTo(0, 0, 200);
         }
 
         /**当列表长度为空时  加载当前页数据 */
-        // setTimeout(() =>{
-        // if (this.globel.newsList[index].newList.length == 0) {
-        //     this.initPage(this.globel.newsList[this.currentPage].objList);
-        // }
-        // },200)
+        setTimeout(() =>{
+            this.getList();
+        },200)
     }
 
     changePage(objList) {
@@ -187,12 +186,21 @@ class home extends Component {
     }
 
     getList(){
-        // React.ajaxPost('news', {
-        //     type: 1,  //this.props.getChannel[this.state.currentPage].id
-        //     page: 1
-        // }).then(res => {
-        //     console.log(res);
-        // })
+        React.ajaxPost('news', {
+            type: this.state.currentPage+1,  //this.props.getChannel[this.state.currentPage].id
+            page: this.props.getChannel[this.state.currentPage].page
+        }).then(res => {
+            let obj = {
+                page:res.data.current_page,
+                type:this.state.currentPage,
+                dataList:res.data.data
+            }
+            if(res.data.current_page == res.data.last_page){
+                obj.isNoMore = true
+            }
+            this.props.addpage('ADDPAGE',obj);
+            console.log(this.props.getChannel)
+        })
     }
 
     initPage(page) {
@@ -211,7 +219,6 @@ class home extends Component {
               this.globel.newsList[this.currentPage].isNoMore = true;
               
             }
-  
             setTimeout(() =>{
                this.$refs.loadMore[this.currentPage].forceUpdate(true);
             },300)
@@ -256,7 +263,7 @@ class home extends Component {
                         {this.props.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <ArticleList name={'banner'+index} height={this.state.height} ></ArticleList>
+                                    <ArticleList name={'banner'+index} height={this.state.height} dataList={this.props.getChannel[this.state.currentPage].dataList}></ArticleList>
                                 </div>)
                             }
                         })}

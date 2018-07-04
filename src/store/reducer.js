@@ -35,7 +35,8 @@ function getChannel(channel = state.channel,action){
 				let _channel = action.params;
 				_channel.forEach((item,index) => {
 					item['page'] = 1;
-					item['isNomore'] = false;
+					item['isNoMore'] = false;
+					item['dataList'] = [];
 				})
 				state.channel = _channel;
 			return state.channel;
@@ -48,11 +49,18 @@ function getChannel(channel = state.channel,action){
 function setPage(page = state.pageList,action){
 	switch (action.type) {
 		case type.SETPAGELIST:
-			console.log(this)
 			state.channel = action.params;
 			return state.channel;
 		case type.ADDPAGE:
-			state.channel = action.params;
+			state.channel[action.params.type].page = action.params.page;
+			if(action.params.isNoMore){
+				state.channel[action.params.type].isNoMore = !state.channel[action.params.type].isNoMore;
+			}
+			if(action.params.down){  //下拉
+				state.channel[action.params.type].dataList = action.params.dataList;
+			}else{  //上拉
+				state.channel[action.params.type].dataList.push(...action.params.dataList);
+			}
 			return state.channel;
 		case type.SETNOMORE:
 			state.channel = action.params;

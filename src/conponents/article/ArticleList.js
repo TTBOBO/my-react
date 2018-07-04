@@ -14,7 +14,7 @@ class ArticleList extends Component {
         
     }
     componentDidMount() {
-        // this.initList();
+        // console.log(this.props);
     }
 
     initList(num) {
@@ -53,16 +53,16 @@ class ArticleList extends Component {
             <div style={{ height: '100%' }} id="article-view">
                 <Scroll ref="scroll" loadMore={(num) => this.initList(num)}  curHeight={1}>
                     <div className="shopList" id="shopList">
-                        {this.state.arr.map((item, index) => {
+                        {this.props.dataList.map((item, index) => {
                             return (
                             <div className="shop-list"  key={index}>
                                 <div id="shop-item">
                                     <div className="shop-list-con">
                                         <div className="shop-text">
-                                            <p className="text-ellipsis">价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按时打卡了华盛顿卡价值SD卡还是快点哈老师看到哈安康市大理石的看见了爱上大垃圾开始懂了看见啊按时打卡了华盛顿卡时打卡了华盛顿卡</p>
-                                            <p className="tool"> <span><span className="icon iconfont icon-xianshikejian"></span><span className="num">123</span></span><span><span className="icon iconfont icon-comment"></span><span className="num">78944</span></span></p>
+                                            <p className="text-ellipsis">{item.title}</p>
+                                            <p className="tool"> <span><span className="icon iconfont icon-xianshikejian"></span><span className="num">{item.reading}</span></span><span><span className="icon iconfont icon-comment"></span><span className="num">{item.comment}</span></span></p>
                                         </div>
-                                        <div><img src={require("../../assets/img/blur-book-stack-books-590493.png")} /></div>
+                                        <div><img src={item.allimgs[0]} /></div>
                                     </div>
                                 </div>
                             </div>)

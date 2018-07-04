@@ -64,7 +64,7 @@ class index extends Component {
             this.getCurrentIndex(pos.y);
         });
     }
-
+    
     getCurrentIndex(curY) {
         if (curY > -50) {
             this.setState({
@@ -86,7 +86,7 @@ class index extends Component {
 
     getHeight() {
         this.listheight = [];  //初始化列表组高度的组合
-        let height = 0;
+        let height = 50;
         this.listheight.push(height);   //初始化  push第一个高度距离
         for (var i in this.refs) {
             height += this.refs[i].clientHeight;

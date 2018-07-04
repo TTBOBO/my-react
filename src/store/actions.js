@@ -13,3 +13,7 @@ export function setpagelist (status,params){
    
     return { type:type.SETPAGELIST,status,params};
 }
+
+export function addpage(status,params){
+    return { type:type.ADDPAGE,status,params};
+}
