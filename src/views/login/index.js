@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Navbar from '../../conponents/navbar/navBar';
 import './login.css'
+import util from '../../assets/js/util';
 import { Toast} from 'antd-mobile';
+import {withRouter} from 'react-router-dom'
+
+@withRouter
 class login extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +23,7 @@ class login extends Component {
     }
 
     goLogin(){
+        
         if(!this.state.mobile || !/^1(3|4|5|7|8|9)\d{9}$/.test(this.state.mobile)){
             Toast.info("请输入正确的手机号码",2,null,false);
             return false;
@@ -33,6 +38,8 @@ class login extends Component {
         }).then(res => {
             if(res.status == 'success') {
                 Toast.info("登录成功",2,null,false);
+                util.setLocalStorage('userinfo',JSON.stringify(res.userinfo));
+                this.props.history.goBack();
             }else{
                 Toast.info(res.msg,2,null,false);
             }

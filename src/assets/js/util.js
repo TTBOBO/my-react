@@ -1113,13 +1113,11 @@ let utils = {
     localStorage.clear();
   },
   setSessionStorage: function (name, vlaue) {
-    localStorage.setItem(name, vlaue);
-    // sessionStorage.setItem(name, vlaue); 
+    sessionStorage.setItem(name, vlaue); 
   },
   getSessionStorage: function (name) {
     // console.log(localStorage.getItem(name))
-    return localStorage.getItem(name);
-    // return sessionStorage.getItem(name);
+    return sessionStorage.getItem(name);
   },
   clearSessionStorage: function () {
     localStorage.clear();
