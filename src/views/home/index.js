@@ -147,7 +147,6 @@ class home extends Component {
     activeLi(index, status) {
         let _left = this.state.left;
         this.setState({
-            left: _left + (index * 1.2),
             currentPage: index
         })
         // this.left = this.left + index * 1.2;
@@ -161,7 +160,6 @@ class home extends Component {
     getActive(index) {
         let left = 0.3;
         if (!this.state.topClick) {
-           
             left = left + index * 1.2;
             this.setState({
                 left: left,
@@ -246,6 +244,7 @@ class home extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <div className="topWrapper" ref="topWrapper">
+                
                     <ul ref="ul" style={{position:'relative'}}>
                         {this.props.getChannel.map((item, index) => {
                             return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
@@ -253,6 +252,7 @@ class home extends Component {
                         <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
                     </ul>
                 </div>
+                {this.state.left}
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
                         {this.props.getChannel.map((item, index) => {

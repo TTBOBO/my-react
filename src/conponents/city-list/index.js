@@ -11,7 +11,7 @@ class index extends Component {
             scrollY: 0,
             letter: [],
             currentIndex: 0,  //默认选中第一个
-            letterItemH:window.innerHeight <= 480 ? 17 : 18,
+            letterItemH:window.innerHeight <= 480 ? 17 : 18,   //设置每个字母的高度
             currentLetter:"123",
             hadndTouch:false,
             curCity:""
@@ -40,6 +40,7 @@ class index extends Component {
         this.setState({
             curCity:name
         })
+        // this.props.handList(name,index);
     }
 
 
@@ -131,6 +132,7 @@ class index extends Component {
         this.setState({
             hadndTouch:true
         })
+        // this.props.handMove(this.touch.anchorIndex);
     }
 
     touchMove(e) {
@@ -148,6 +150,7 @@ class index extends Component {
         this.setState({
             currentLetter:cityList[resIndex] ? cityList[resIndex].name.substr(0, 1) : cityList[cityList.length-1].name.substr(0, 1)
         })
+        // this.props.handMove(resIndex);
     }
 
 
@@ -170,7 +173,7 @@ class index extends Component {
                                 <h2>{item.name}</h2>
                                 <ul className="list-ul-content">
                                     {item.cities.map((_item, _index) => {
-                                        return (<li className="list-ul-item" key={_index + 'item'} onClick={() => this.setCurCity(_item.name)}>{_item.name}</li>)
+                                        return (<li className="list-ul-item" key={_index + 'item'} onClick={() => this.setCurCity(_item.name,_index)}>{_item.name}</li>)
                                     })}
                                 </ul>
                             </li>)
