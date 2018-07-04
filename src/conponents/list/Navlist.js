@@ -32,7 +32,6 @@ class NavList extends Component {
 
     touchStart(e){
         this.firstX = e.touches[0].pageX;
-        console.log(e.target.parentNode.nextSibling.clientWidth)
         this.setState({
             toolWidth:e.target.parentNode.nextSibling.clientWidth
         })
@@ -42,6 +41,10 @@ class NavList extends Component {
         //(this.props.threshold*50)
         if((this.firstX - _curPageX) > 0){
             if((this.firstX - _curPageX) > this.props.threshold*50){
+                this.setState({
+                    transform:`translate3d(-${this.state.toolWidth}px, 0px, 0px)`,
+                    transformtool:`translate3d(0, 0px, 0px)%`
+                })
                 return false;
             }
             this.setState({
