@@ -244,7 +244,6 @@ class home extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <div className="topWrapper" ref="topWrapper">
-                
                     <ul ref="ul" style={{position:'relative'}}>
                         {this.props.getChannel.map((item, index) => {
                             return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
@@ -252,7 +251,6 @@ class home extends Component {
                         <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
                     </ul>
                 </div>
-                {this.state.left}
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
                         {this.props.getChannel.map((item, index) => {
