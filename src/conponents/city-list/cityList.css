@@ -76,3 +76,20 @@
 .letter ul .active{
     color: #fee151;
 }
+
+.letter-box{
+    padding: .4rem .2rem;
+    color: #fff;
+    background: rgba(0,0,0,.1);
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateZ(-50%);
+    transform: translateZ(-50%);
+    left: 50%;
+    margin: auto;
+    border-radius: .1rem;
+    font-size: .32rem;
+    min-width: .58rem;
+    text-align: center;
+    display: none;
+}
