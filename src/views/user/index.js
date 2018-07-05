@@ -46,6 +46,9 @@ class index extends Component {
         }
     }
     
+    handler(item,index){
+        console.log(item,index);
+    }
 
     render() {
         const navbar = {
@@ -57,7 +60,7 @@ class index extends Component {
             <div>
                 <Navbar option={navbar}></Navbar>
                 <Navlist navList={this.state.navList}></Navlist>
-                <CellSwiper></CellSwiper>
+                <CellSwiper handler={(index) => this.handler(index)}></CellSwiper>
                 {/* <div>
                     <span className="icon iconfont icon-shouye"></span>
                 </div> */}

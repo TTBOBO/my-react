@@ -61,6 +61,7 @@ class cellSwiper extends Component {
                 [点击,右滑,左滑]其他item时关闭当前item  无其他操作事件
              */
             this.setOtherClose(index)
+            
         }
     }
 
@@ -168,20 +169,27 @@ class cellSwiper extends Component {
         return count > 0 ? false : true;
     }
 
-    
+    handClickbtn(item,index){
+        if(this.props.handler){
+            this.props.handler(item,index)
+        }
+    }
 
     render() {
         return (
             <div>
                 <ul className="list-ul-content">
                     {this.state.arr.map((item,index) =>{
-                        return ( <li key={index} className="list-ul-item" onTouchStart={(e) => {this.touchStart(e,item,index)}} onTouchEnd={(e) => {this.touchEnd(e,item,index)}}  onTouchMove={(e) => {this.touchMove(e,item,index)}}>
-                            <div className="list-con" style={{transform:item.transform}}>
+                        return ( <li key={index} className="list-ul-item" >
+                            <div className="list-con" style={{transform:item.transform}} onTouchStart={(e) => {this.touchStart(e,item,index)}} onTouchEnd={(e) => {this.touchEnd(e,item,index)}}  onTouchMove={(e) => {this.touchMove(e,item,index)}}>
                                 <div className="list-con-box">12313</div>
                             </div>
                             <div className="slider-right" style={{transform:item.transformtool}}>
-                                <a className="del">删除</a>
-                                {/* <a className="del">删除</a> */}
+                                {
+                                    this.props.btnArr.map((item,index) => {
+                                        return (<a className={item.className || 'del'} onClick={()=> this.handClickbtn(item,index)} key={index}>{item.name}</a>)
+                                    })
+                                }
                             </div>
                         </li>)
                     })}
@@ -193,7 +201,11 @@ class cellSwiper extends Component {
 }
 
 cellSwiper.defaultProps = {
-    threshold:1.5
+    threshold:1.5,
+    btnArr:[{
+        name:"删除",
+        className:"del"
+    }]
 }
 
 export default cellSwiper;
