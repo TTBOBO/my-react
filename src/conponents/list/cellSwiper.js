@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import { List } from 'antd-mobile';
-import {withRouter} from 'react-router-dom';
-import ReactDOM from "react-dom"
-import { Toast } from 'antd-mobile';
 import './list.css'
-const Item = List.Item;
-const Brief = Item.Brief;
-@withRouter
-class NavList extends Component {
+class cellSwiper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navlist: this.props.navList,
-            header:"",
             toolWidth:0,
             defauleOption:{
                 transform:"translate3d(0, 0px, 0px)",
@@ -28,36 +19,58 @@ class NavList extends Component {
         }
     }
 
-    
 
-    handClickItem(row,index){
-        if(row.callBack && typeof row.callBack == 'function'){
-            row.callBack(row);
-        }else if(!row.callBack && row.isLigin){
-            Toast.info(row.info || "请登录再操作")
-        }
+    componentDidMount() {
+
     }
 
+
+    //触摸开始
+    /**
+     * 
+     * @param {*} e  event
+     * @param {*} item  当前触摸的item数据
+     * @param {*} index 当前触摸的item  下标
+     */
     touchStart(e,item,index){
+        //储存触摸开始的坐标
         this.firstX = e.touches[0].pageX;
-        this.setState({
-            toolWidth:e.target.parentNode.nextSibling.clientWidth
-        })
-        
-        
+        // this.setState({
+        //     toolWidth:e.target.parentNode.nextSibling.clientWidth
+        // })
     }
-
+    //触摸结束
+    /**
+     * 
+     * @param {*} e  event
+     * @param {*} item  当前触摸的item数据
+     * @param {*} index 当前触摸的item  下标
+     */
     touchEnd(e,item,index){
         var count = this.state.arr.filter((item) => {
             return item.isOpen
         })
+        //当列表展开数量为0时  执行点击事件 
+        //相反 执行触摸逻辑
+        
         if(count.length == 0){
             console.log(1)
         }else{
+            /**
+            *当前展开一个item时， 点击当前直接关闭 右滑无效不关闭当前item   
+                [点击,右滑,左滑]其他item时关闭当前item  无其他操作事件
+             */
             this.setOtherClose(index)
         }
     }
 
+    //触摸移动中
+    /**
+     * 
+     * @param {*} e  event
+     * @param {*} item  当前触摸的item数据
+     * @param {*} index 当前触摸的item  下标
+     */
     touchMove(e,item,index){
         if(!this.setAlldefault(index)){
             return false;
@@ -66,9 +79,11 @@ class NavList extends Component {
         this._curPageX = _curPageX;
         //左滑
         if((this.firstX - _curPageX) > 0){
-            if(item.isOpen){
+            if(item.isOpen){  //若当前已展开move 停止
                 return;
             }
+            // if((this.firstX - _curPageX)  && !item.isOpen){
+            // 没有展开时执行模块移动效果
             if((this.firstX - _curPageX) > this.props.threshold*50 && !item.isOpen){
                 this.setState({
                     arr:this.getopen(index,_curPageX)
@@ -76,6 +91,7 @@ class NavList extends Component {
                 return false;
             }
         }else{
+        //右滑  关闭所有展开的item 类同初始化
             let _arr = [];
             _arr = this.state.arr.map((item) => {
                 item = this.state.defauleOption;
@@ -88,6 +104,11 @@ class NavList extends Component {
         }
     }
 
+    /**
+     * 
+     * @param {*} _index   当前移动的item 下标
+     * @param {*} _curPageX 当前触摸的坐标
+     */
     getopen(_index,_curPageX){
         let _arr = [];
         let itemObj = {
@@ -106,20 +127,23 @@ class NavList extends Component {
         return _arr;
     }
 
+    /**
+     * 
+     * @param {*} touchIndex 当前触摸结束的item 下标
+     */
     setOtherClose(touchIndex){
         let _arr = [];
-        let count = 0;
-        let isTouchCurIndex = false;
+        /**
+         * 当有展开的item时   触摸任何一个item 都会关闭展开的 
+         * 反之初始化默认
+         */
         this.state.arr.forEach((item,index) => {
-            if(item.isOpen){
+            if(item.isOpen){  
                 if(touchIndex == index && this._curPageX){
-                    isTouchCurIndex = true;
                     this._curPageX = "";
-                }else if(!this._curPageX){
-                    isTouchCurIndex = false;
+                }else if(!this._curPageX){  
                     item = this.state.defauleOption;
                 }
-                count++;
             }else{
                 item = this.state.defauleOption;
             }
@@ -128,45 +152,27 @@ class NavList extends Component {
         this.setState({
             arr:_arr
         })
-       
-        
-        return count == 0 ? true : false;
     }
-
+    /**
+     * 
+     * @param {*} touchIndex 当前触摸结束的item 下标
+     */
     setAlldefault(touchIndex){
-        let _arr = [];
         let count = 0;
         this.state.arr.forEach((item,index) => {
             if(item.isOpen == true && touchIndex != index){
-                item = this.state.defauleOption;
-                item.isOpen = false;
                 count++;
             }
-            _arr.push(item);
         })
+        //返回 有展开的item  并且不是当前触摸的   否知 触摸move当前  会关闭item展开
         return count > 0 ? false : true;
     }
 
+    
 
     render() {
         return (
-            //renderHeader={() => this.state.header || ""} style={{height:this.state.header ? '' : '0px'}}
-            
             <div>
-                <List   className="my-list">
-                    { this.state.navlist.map(((item,index) => {
-                        return <Item
-                            thumb={item.thumb}
-                            arrow="horizontal"
-                            onClick={() => {
-                                this.handClickItem(item,index);
-                            }}
-                            key={index}
-                            >
-                            {item.title}{item.Brief ? <Brief>{item.Brief}</Brief> : ""}
-                        </Item>
-                    }))}
-                </List>
                 <ul className="list-ul-content">
                     {this.state.arr.map((item,index) =>{
                         return ( <li key={index} className="list-ul-item" onTouchStart={(e) => {this.touchStart(e,item,index)}} onTouchEnd={(e) => {this.touchEnd(e,item,index)}}  onTouchMove={(e) => {this.touchMove(e,item,index)}}>
@@ -182,14 +188,12 @@ class NavList extends Component {
                    
                 </ul>
             </div>
-            
         );
     }
 }
 
-
-NavList.defaultProps = {
+cellSwiper.defaultProps = {
     threshold:1.5
 }
 
-export default NavList;
+export default cellSwiper;

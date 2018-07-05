@@ -3,6 +3,7 @@ import Navbar from '../../conponents/navbar/navBar';
 import Navlist from '../../conponents/list/Navlist';
 import { Toast} from 'antd-mobile';
 import {withRouter} from 'react-router-dom'
+import CellSwiper from '../../conponents/list/cellSwiper';
 @withRouter
 class index extends Component {
     constructor(props) {
@@ -56,9 +57,10 @@ class index extends Component {
             <div>
                 <Navbar option={navbar}></Navbar>
                 <Navlist navList={this.state.navList}></Navlist>
-                <div>
+                <CellSwiper></CellSwiper>
+                {/* <div>
                     <span className="icon iconfont icon-shouye"></span>
-                </div>
+                </div> */}
             </div>
         );
     }

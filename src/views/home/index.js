@@ -14,7 +14,8 @@ class home extends Component {
             left: .3,
             currentPage: 0,
             isNoMore: false,
-            height:""
+            height:"",
+            getChannel:[]
         }
     }
     componentDidMount() {
@@ -24,7 +25,10 @@ class home extends Component {
             // this.initScroll();
             // this.initSwiper();
         }
+        
     }
+
+    
 
     componentWillMount() {
        
@@ -32,68 +36,18 @@ class home extends Component {
 
 
     initBanner() {
-        // if (this.props.getChannel.length == 0) {
-            let arr = [
-                {
-                    "id": 1,
-                    "name": "教育",
-                    "status": 1,
-                    "create_time": "2016-12-22 18:22:24"
-                },
-                {
-                    "id": 2,
-                    "name": "娱乐",
-                    "status": 1,
-                    "create_time": "2018-06-07 15:23:01"
-                },
-                {
-                    "id": 3,
-                    "name": "财经",
-                    "status": 1,
-                    "create_time": "2018-06-07 15:23:09"
-                },
-                {
-                    "id": 4,
-                    "name": "游戏",
-                    "status": 1,
-                    "create_time": "2018-06-11 16:15:14"
-                },
-                {
-                    "id": 5,
-                    "name": "新闻",
-                    "status": 1,
-                    "create_time": "2018-06-13 15:35:32"
-                },
-                {
-                    "id": 7,
-                    "name": "科技",
-                    "status": 1,
-                    "create_time": "2018-06-13 15:39:28"
-                },
-                {
-                    "id": 6,
-                    "name": "体育",
-                    "status": 1,
-                    "create_time": "2018-06-13 15:40:34"
-                }
-            ];
-            // this.props.get_channel('GETCHANNEL', arr);
-            // setTimeout(() => {
-            //     this.initScroll(); //初始化 横向滚动栏
-            //     this.initSwiper(); //初始化横向滚动栏宽度
-            //     this.getList(); //获取栏目内容
-            // },100)
             React.ajaxPost('get_channel', {
                 username: 18680341334,
-                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3sidXNlcm5hbWUiOiIxNTMwODQ3ODI3MCIsInRpbWUiOjE1Mjk2NTg0NTR9XQ.BB7I58YHibKcJHu-xWsCMhhSrKIk5Ewrhh05hbyBnGQ"
+                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9waHAtbGN0dC5vcmciLCJhdWQiOiJodHRwOlwvXC9waHAtbGN0dC5jb20iLCJzdWIiOlt7InVzZXJuYW1lIjoiMTg2ODAzNDEzMzQiLCJ0aW1lIjoxNTMwNzU0ODYzfV0sImlhdCI6MTUzMDc1NDg2M30.gDONKdP6HUVeDJCoFdrlweni4FbionwOa_DU3oNW8Oo"
             }).then(res => {
-                console.log(res);
                 let arr = [...res.data];
                 this.props.get_channel('GETCHANNEL', arr);
+                this.setState({
+                    getChannel :this.props.getChannel
+                })
+                this.getList(3); //获取栏目内容
                 this.initScroll(); //初始化 横向滚动栏
                 this.initSwiper(); //初始化横向滚动栏宽度
-                this.getList(); //获取栏目内容
-                console.log(this.props)
             })
     }
 
@@ -177,15 +131,18 @@ class home extends Component {
 
         /**当列表长度为空时  加载当前页数据 */
         setTimeout(() =>{
-            this.getList();
+            this.getList(3);
         },200)
     }
 
     changePage(objList) {
         // this.initPage(objList);
     }
-
-    getList(){
+    // 1下拉  2 上拉  3左右切换
+    getList(status){
+        if(this.props.getChannel[this.state.currentPage].dataList.length != 0 && status == 3){
+            return false;
+        }
         React.ajaxPost('news', {
             type: this.state.currentPage+1,  //this.props.getChannel[this.state.currentPage].id
             page: this.props.getChannel[this.state.currentPage].page
@@ -199,32 +156,13 @@ class home extends Component {
                 obj.isNoMore = true
             }
             this.props.addpage('ADDPAGE',obj);
-            console.log(this.props.getChannel)
+            this.setState({
+                getChannel :this.props.getChannel
+            })
         })
     }
 
-    initPage(page) {
-        this.globel.newsList[this.currentPage].objList = page ? page : 1;
-        //当下这行可忽略
-        this.globel.newsList[this.currentPage].objList.filter = "hm_archives.typeid = "+ ( (this.currentPage % 7 ) + 2);
-        this.$ajaxPost("/hmapi/article/api_article/grid", this.globel.newsList[this.currentPage].objList).then(
-          res => {
-            if(res.data.rows.length > 0 ){
-              /**给当前页新闻列表添加加载数据 */
-              this.isNoMore = false;
-              this.globel.newsList[this.currentPage].isNoMore = false;
-              this.globel.newsList[this.currentPage].objList.page == 1 ? (this.globel.newsList[this.currentPage].newList = res.data.rows)  : this.globel.newsList[this.currentPage].newList.push(...res.data.rows);
-            }else{
-              this.isNoMore = true;
-              this.globel.newsList[this.currentPage].isNoMore = true;
-              
-            }
-            setTimeout(() =>{
-               this.$refs.loadMore[this.currentPage].forceUpdate(true);
-            },300)
-          }
-        );
-      }
+    
 
 
     initSwiper() {
@@ -252,7 +190,7 @@ class home extends Component {
             <div style={{ height: '100%' }}>
                 <div className="topWrapper" ref="topWrapper">
                     <ul ref="ul" style={{position:'relative'}}>
-                        {this.props.getChannel.map((item, index) => {
+                        {this.state.getChannel.map((item, index) => {
                             return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
                         })}
                         <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
@@ -260,10 +198,10 @@ class home extends Component {
                 </div>
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
-                        {this.props.getChannel.map((item, index) => {
+                        {this.state.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <ArticleList name={'banner'+index} height={this.state.height} dataList={this.props.getChannel[this.state.currentPage].dataList}></ArticleList>
+                                    <ArticleList name={'banner'+index} height={this.state.height} dataList={item.dataList}></ArticleList>
                                 </div>)
                             }
                         })}
