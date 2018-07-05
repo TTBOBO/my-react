@@ -31,6 +31,22 @@ class index extends Component {
             }]
         }
     }
+    componentWillMount(){
+        let dom = null;
+        let arr = [];
+        for(var i = 0; i < 5; i++){
+            arr.push({
+                children:this.getDom(i)
+            })
+        }
+        this.setState({
+            listData:arr
+        })
+    }
+
+    getDom(i){
+        return (<div>123{i}</div>);
+    }
     
     getResult(res){
         if(res.isLogin){
@@ -60,7 +76,7 @@ class index extends Component {
             <div>
                 <Navbar option={navbar}></Navbar>
                 <Navlist navList={this.state.navList}></Navlist>
-                <CellSwiper handler={(index) => this.handler(index)}></CellSwiper>
+                <CellSwiper listData={this.state.listData} handler={(index) => this.handler(index)}></CellSwiper>
                 {/* <div>
                     <span className="icon iconfont icon-shouye"></span>
                 </div> */}

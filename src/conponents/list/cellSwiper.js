@@ -9,19 +9,26 @@ class cellSwiper extends Component {
                 transform:"translate3d(0, 0px, 0px)",
                 transformtool:"translate3d(100%, 0px, 0px)",
             },
-            arr:[{
-                transform:"translate3d(0, 0px, 0px)",
-                transformtool:"translate3d(100%, 0px, 0px)%",
-            },{
-                transform:"translate3d(0, 0px, 0px)",
-                transformtool:"translate3d(100%, 0px, 0px)%",
-            }]
+            arr:[]
         }
     }
 
 
     componentDidMount() {
 
+    }
+
+    componentWillMount(){
+        this.setState({
+            arr:this.props.listData.map((item) => { 
+                let _item = {};
+                
+                _item = Object.assign(this.state.defauleOption,item);
+                return JSON.parse(JSON.stringify(_item));  //深拷贝
+            })
+        })
+        console.log(this.state.arr)
+        // console.log(this.props)
     }
 
 
@@ -182,12 +189,16 @@ class cellSwiper extends Component {
                     {this.state.arr.map((item,index) =>{
                         return ( <li key={index} className="list-ul-item" >
                             <div className="list-con" style={{transform:item.transform}} onTouchStart={(e) => {this.touchStart(e,item,index)}} onTouchEnd={(e) => {this.touchEnd(e,item,index)}}  onTouchMove={(e) => {this.touchMove(e,item,index)}}>
-                                <div className="list-con-box">12313</div>
+                                <div className="list-con-box">
+                                    {
+                                       this.props.listData[index].children
+                                    }
+                                </div>
                             </div>
                             <div className="slider-right" style={{transform:item.transformtool}}>
                                 {
                                     this.props.btnArr.map((item,index) => {
-                                        return (<a className={item.className || 'del'} onClick={()=> this.handClickbtn(item,index)} key={index}>{item.name}</a>)
+                                        return (<a style={item.style} className={item.className || 'del'} onClick={()=> this.handClickbtn(item,index)} key={index}>{item.name}</a>)
                                     })
                                 }
                             </div>
@@ -204,8 +215,14 @@ cellSwiper.defaultProps = {
     threshold:1.5,
     btnArr:[{
         name:"删除",
-        className:"del"
-    }]
+        className:"del",
+        style:{}
+    },{
+        name:"收藏",
+        className:"del",
+        style:{}
+    }],
+    listData:[{name:"<div>123<div>"},{name:1111},{name:1112},{name:1116},{name:1114},{name:1115}]
 }
 
 export default cellSwiper;
