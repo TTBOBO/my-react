@@ -27,18 +27,18 @@ class ArticleList extends Component {
     
 
     handClickItem(item,index) {
-        if(typeof this.props.handClickItem == 'function'){
+        if(typeof this.props.handClickItem === 'function'){
             this.props.handClickItem(item);
         }
     }
 
     render() {
-        const navbar = {
-            mode: "dark",
-            title: "购物车",
-            ltype: "",
-            rightContent: []  //<Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={() => this.handClick()} />
-        }
+        // const navbar = {
+        //     mode: "dark",
+        //     title: "购物车",
+        //     ltype: "",
+        //     rightContent: []  //<Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={() => this.handClick()} />
+        // }
 
 
         return (

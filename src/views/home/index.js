@@ -20,7 +20,7 @@ class home extends Component {
     }
     componentDidMount() {
         this.initBanner();
-        if (this.props.getChannel.length != 0) {
+        if (this.props.getChannel.length !== 0) {
             // this.initBanner();
             // this.initScroll();
             // this.initSwiper();
@@ -100,7 +100,6 @@ class home extends Component {
     }
 
     activeLi(index, status) {
-        let _left = this.state.left;
         this.setState({
             currentPage: index
         })
@@ -140,7 +139,7 @@ class home extends Component {
     }
     // 1下拉  2 上拉  3左右切换
     getList(status){
-        if(this.props.getChannel[this.state.currentPage].dataList.length != 0 && status == 3){
+        if(this.props.getChannel[this.state.currentPage].dataList.length !== 0 && status == 3){
             return false;
         }
         React.ajaxPost('news', {

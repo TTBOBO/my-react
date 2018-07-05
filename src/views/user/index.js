@@ -76,10 +76,7 @@ class index extends Component {
             <div>
                 <Navbar option={navbar}></Navbar>
                 <Navlist navList={this.state.navList}></Navlist>
-                <CellSwiper listData={this.state.listData} handler={(index) => this.handler(index)}></CellSwiper>
-                {/* <div>
-                    <span className="icon iconfont icon-shouye"></span>
-                </div> */}
+                {/* <CellSwiper listData={this.state.listData} handler={(index) => this.handler(index)}></CellSwiper> */}
             </div>
         );
     }
