@@ -198,7 +198,7 @@ class cellSwiper extends Component {
                             <div className="slider-right" style={{transform:item.transformtool}}>
                                 {
                                     this.props.btnArr.map((item,index) => {
-                                        return (<a style={item.style} className={item.className || 'del'} onClick={()=> this.handClickbtn(item,index)} key={index}>{item.name}</a>)
+                                        return (<a style={item.style}  className={item.className || 'tool-btn'} onClick={()=> this.handClickbtn(item,index)} key={index}>{item.name}</a>)
                                     })
                                 }
                             </div>
@@ -215,11 +215,11 @@ cellSwiper.defaultProps = {
     threshold:1.5,
     btnArr:[{
         name:"删除",
-        className:"del",
+        className:"",
         style:{}
     },{
         name:"收藏",
-        className:"del",
+        className:"",
         style:{}
     }],
     listData:[{name:"<div>123<div>"},{name:1111},{name:1112},{name:1116},{name:1114},{name:1115}]
