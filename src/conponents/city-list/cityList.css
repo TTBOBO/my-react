@@ -19,7 +19,7 @@
 .list-ul-content{
     background: #f7f7f7;
 }
-.list-ul-item{
+.wapper-list .list-ul-item{
     position: relative;
     height: 50px;
     line-height: 50px;

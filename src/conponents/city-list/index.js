@@ -166,7 +166,7 @@ class index extends Component {
                 <ul>
                     <li className="list-ul-item">当前选中的是：{this.state.curCity}</li>
                 </ul>
-                <div ref="wapperList" style={{ height: "100%" }}>
+                <div ref="wapperList" style={{ height: "100%" }} className="index-list">
                     <ul className="list-ul" ref="content">
                         {cityList.map((item, index) => {
                             return (<li key={index} ref={'listGroup' + index}>

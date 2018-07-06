@@ -4,11 +4,6 @@ import { Provider } from 'react-redux';
 import store from '../store/index'
 
 
-// import {BrowserRouter as Router, Route, Switch, Redirect, NavLink,Link} from "react-router-dom"
-// import Tabbar from '../conponents/Tabbar/tabbar'
-// import Home from './home/index';
-// import Cart from './cart/cart'
-
 import './main.css'
 
 class Main extends Component {
@@ -21,7 +16,7 @@ class Main extends Component {
     }
 
     componentWillMount(){
-        
+
     }
 
     changeBar(name){
@@ -33,16 +28,6 @@ class Main extends Component {
         return (
             <Provider store={store}>
             <Router />
-            {/* <div>
-                <div className="app-view">
-                    <Switch>
-                        <Route path="/cart" component={Cart} />
-                        <Route path="/home" component={Home} />
-                        <Redirect from="/" to={`/`+this.state.routeLike} />
-                    </Switch>
-                </div>
-                <Tabbar history={this.state.history} changeBar={this.changeBar.bind(this)}></Tabbar>
-            </div> */}
             </Provider>
         );
     }

@@ -38,6 +38,45 @@ class article extends Component {
         return (
             <div>
                 <Navbar option={navbar}></Navbar>
+                <div className="news-wrap">
+                    <div id="content">
+                        <div style="">
+                            <video src="/resource/front/img/QQ20180326-135401-HD.mp4" controls="controls" className="video-video"></video>
+                            <div className="con-news">
+                                <div className="news-title"></div>
+                                <div className="news-views-video">
+                                    <div><span>来源于</span><span className="source"></span></div>
+                                    <div className="review-zan-info"><img className="news-zan" src="/resource/front/img/赞.png" alt=""> <span className="groom"></span></div>
+                                </div>
+                            </div>
+                            <div className="views-list">
+                                <span className="con-list-title">相关视频</span>
+                                <div className="video-list"></div>
+                            </div>
+                            <div className="con-list-wrap">
+                                <span className="con-list-title">相关评论</span>
+                                <div className="feed-back">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="send">
+                        <div className="input-wrap">
+                            <img src="/resource/front/img/写评论.png" alt="" />
+                            <input type="text" placeholder="写评论" id="ipt" />
+                            <div className="send">发布</div>
+                        </div>
+                        <span><img src="/resource/front/img/评论(1).png" alt="" className="plsl" /></span>
+                        <span className="plnub" detail="comment"></span>
+                        <span id="share"><img src="/resource/front/img/icon_share.png" alt="" className="share-b" /></span>
+                    </div>
+                    <div className="canvas">
+                        <div className="canvas-box" style="width: 80px; height: 80px; right: 0;">
+                            <canvas width="320" height="320" id="yuan" style="width: 80px; height: 80px;" ></canvas>
+                        </div>
+                    </div>
+	            </div>
             </div>
         );
     }
