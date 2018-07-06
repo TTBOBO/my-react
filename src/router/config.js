@@ -29,6 +29,10 @@ export const otherRouterMap = [
         name:"登录",
         exact:true,
         component:_import_views("login")
+    },{
+        path:"/article/:id",
+        name:"文章详情",
+        component:_import_views("article/article")
     },
 ];
 

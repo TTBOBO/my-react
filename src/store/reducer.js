@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux'
 import * as type from './actionType'
+import util from '../assets/js/util'
+// import { url } from 'inspector';
 const state = {
 	loginStatus:false,
 	loginInfo:"",
 	channel:[],
-	pageList:[]
+	pageList:[],
+	userinfo:{}   //用户信息
 }
 //设置皮肤
 function skin(skin = 0, action) {
@@ -24,7 +27,7 @@ function getloginStatus(loginStatus = state.loginStatus,action){
 				state.loginInfo = action.params;
 				return state.loginInfo;
 		default:
-			return false;
+			return state.loginInfo;
 	}
 }
 
@@ -42,6 +45,17 @@ function getChannel(channel = state.channel,action){
 			return state.channel;
 		default:
 			return channel;
+	}
+}
+
+function getuserinfo(_userinfo = state.userinfo,action){
+	switch (action.type) {
+		case type.GETLOGININFO:
+			let userinfo = util.getLocalStorage('userinfo');
+			state.userinfo = userinfo ? JSON.parse(userinfo) : false;
+			return state.userinfo;
+		default:
+			return _userinfo;
 	}
 }
 
@@ -75,6 +89,7 @@ const reducer = combineReducers({
 	skin,
 	getloginStatus,
 	getChannel,
-	setPage
+	setPage,
+	getuserinfo
 });
 export default reducer;

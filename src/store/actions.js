@@ -17,3 +17,7 @@ export function setpagelist (status,params){
 export function addpage(status,params){
     return { type:type.ADDPAGE,status,params};
 }
+
+export function getLoginStatus(status,params){
+    return {type:type.GETLOGININFO,status,params};
+}

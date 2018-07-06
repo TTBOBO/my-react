@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family:微软雅黑;
 }
+
+.h-line-5{
+  height: .1rem;
+}
+
+.h-line-10{
+  height: .2rem;
+}
+
+.h-line-15{
+  height: .3rem;
+}
+
+.h-line-20{
+  height:.4rem ;
+}

@@ -1,0 +1,408 @@
+.news-wrap {
+	width: 7.5rem;
+	position: absolute;
+	/*top: 0;*/
+	/*bottom: 0;*/
+	/*left: 0;*/
+	/*right: 0;*/
+	height: 100%;
+	margin: auto;
+	max-width: 7.5rem;
+	margin: 0 auto;
+	/*position: relative*/
+}
+
+* {
+	-moz-user-select: auto;
+	-webkit-user-select: auto;
+	-ms-user-select: auto;
+	-khtml-user-select: auto;
+	user-select: auto;
+}
+
+#content {
+	height: 100%;
+}
+
+main {
+	/*position: absolute;/* main绝对定位，进行内部滚动 */
+
+	top: 0;
+	bottom: 40px;
+	/*防止footer遮挡main内容*/
+	overflow-y: auto;
+	/*使之可以滚动*/
+	-webkit-overflow-scrolling: touch;
+	/* 增加该属性，可以增加弹性 */
+	background-color: #fff;
+	width: 7.5rem;
+}
+
+* {
+	touch-action: none;
+}
+
+main .content {
+	height: 1000px;
+}
+
+footer {
+	position: fixed;
+	height: .86rem;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+#info {
+	overflow: hidden;
+}
+
+.con-bottom-con span img {
+	width: 100%;
+}
+
+.news-title {
+	min-height: 16px;
+}
+
+body {
+	width: 7.5rem;
+	margin: 0 auto;
+}
+
+.canvas {
+	border-radius: 50%;
+	background: #fff;
+	position: fixed;
+	top: 3rem;
+	/* right: 0; */
+	width: 100%;
+	max-width: 7.5rem;
+	background: transparent;
+	margin: auto;
+	position: fixed;
+	top: 300px;
+	text-align: right;
+	z-index: 1500;
+}
+
+.canvas-box {
+	width: 80px;
+	height: 80px;
+	right: 0;
+	background: #fff;
+	box-shadow: -1px 2px 7px 0px rgba(0, 0, 0, .35);
+	border-radius: 50%;
+	overflow: hidden;
+	position: absolute;
+	display: none;
+}
+
+.canvas-con {
+	width: 50px;
+	height: 50px;
+	background: red;
+	border-radius: 50%;
+}
+
+.con-news {
+	padding: .26rem .38rem .15rem;
+	font-size: .26rem;
+	line-height: .32rem;
+	border-bottom: .1rem solid #eceaea;
+}
+
+.con-bottom-con {
+	padding: .3rem .38rem .38rem;
+	font-size: .26rem;
+	color: #333;
+	border-bottom: .1rem solid #eceaea;
+}
+
+.news-views {
+	margin-top: .15rem;
+	display: flex;
+	margin-bottom: .3rem;
+	justify-content: space-between;
+}
+
+.news-views div:nth-child(1) span:nth-child(1) {
+	font-size: .24rem;
+	color: #cf4545;
+	margin-right: .2rem;
+}
+
+.news-views div:nth-child(1) span:nth-child(2) {
+	font-size: .24rem;
+	color: #cf4545;
+	margin-right: .2rem;
+}
+
+.news-views div:nth-child(2) {
+	font-size: .24rem;
+	color: #333;
+}
+
+.news-views div:nth-child(2) span:nth-child(2) {
+	font-size: .24rem;
+	margin-right: .2rem;
+}
+
+.news-img {
+	width: 6.78rem;
+	height: 4.34rem;
+}
+
+.news-ju {
+	display: flex;
+	margin-top: .44rem;
+	justify-content: space-between;
+}
+
+.news-ju>div {
+	border: 1px solid #fed847;
+	width: 1.41rem;
+	height: .51rem;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	border-radius: 50px;
+	line-height: .51rem;
+	justify-content: center;
+}
+
+.news-ju div span {
+	display: inline-block;
+}
+
+.news-zan {
+	width: .29rem;
+	margin-right: .2rem;
+	height: .29rem;
+}
+
+.news-jubao {
+	width: .27rem;
+	margin-right: .1rem;
+	height: .35rem;
+}
+
+.con-bottom-gg {
+	padding: .25rem .38rem;
+}
+
+.con-bor {
+	width: 6.8rem;
+	/* height: 5.08rem; */
+	border: 1px solid #333;
+	padding: .2rem .47rem .32rem .3rem;
+}
+
+.con-bottom-con-img {
+	width: 6rem;
+	height: 4rem;
+	margin-bottom: .3rem;
+}
+
+.con-back-ccc {
+	padding-left: .3rem;
+	width: 6.8rem;
+	background: #eceaea;
+	margin: 0 auto .25rem;
+}
+
+.con-back-ccc span {
+	width: 5.73rem;
+	padding: .3rem 0;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-bottom: 1px solid #d6d6d6;
+}
+
+.con-back-ccc span:last-child {
+	border: 0
+}
+
+.con-list-wrap {
+	padding: .3rem .38rem;
+	border-top: .1rem solid #eceaea;
+}
+
+.con-list-title {
+	font-size: .28rem;
+	color: #333;
+	margin-bottom: .37rem;
+}
+
+.review-icon {
+	width: .66rem;
+	height: .66rem;
+	margin-right: .2rem;
+}
+
+.review-wrap {
+	display: flex;
+	margin-top: .37rem;
+	width: 6.8rem;
+}
+
+.review-name-wrap {
+	display: flex;
+	justify-content: space-between;
+	width: 5.9rem;
+	height: .66rem;
+	align-items: center;
+}
+
+.review-zan img {
+	width: .29rem;
+	height: .29rem;
+	margin-right: .18rem;
+}
+
+.review-con {
+	font-size: .24rem;
+	color: #333;
+	line-height: 1.1;
+}
+
+.review-time-wrap {
+	display: flex;
+	justify-content: space-between;
+	width: 5.9rem;
+	height: .66rem;
+	font-size: .24rem;
+	color: #333;
+	align-items: center;
+}
+
+#send {
+	width: 7.5rem;
+	margin: 0 auto;
+	background: #efefef;
+	display: flex;
+	padding: 0 .38rem 0 .24rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.send {
+	float: left;
+	font-size: .24rem;
+	color: #ee5f2d;
+}
+
+.input-wrap {
+	width: 4.86rem;
+	height: .5rem;
+	border: 1px solid #333;
+	display: flex;
+	align-items: center;
+	border-radius: 50px;
+}
+
+#ipt {
+	height: .5rem;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: 0;
+	width: 75%;
+	font-size: .12rem;
+}
+
+.input-wrap>img {
+	width: .22rem;
+	height: .23rem;
+	margin: 0 .1rem 0 .2rem;
+}
+
+.plsl {
+	width: .27rem;
+	height: .27rem;
+}
+
+.share-b {
+	width: .26rem;
+	height: .26rem;
+}
+
+.plnub {
+	font-size: .24rem;
+	color: #333;
+}
+
+.video-video{
+    height: 4.55rem;
+    width: 7.5rem;
+}
+.news-views-video{
+    margin-top: .15rem;
+    display: flex;
+    margin-bottom: .3rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.news-views-video div:nth-child(1) {
+    font-size: .22rem;
+    color: #333;
+       margin-right: .2rem;
+}
+.news-views-video div:nth-child(1) {
+    font-size: .22rem;
+    color: #333;
+       margin-right: .2rem;
+}
+.news-views-video div:nth-child(2){
+    font-size: .24rem;
+    display: flex;
+
+}
+.news-views-video div:nth-child(2) img{
+    width: .29rem;
+    height: .29rem;
+    margin-right: .18rem;
+    padding-top: 0.01rem;
+}
+.views-list{
+    padding: .3rem .38rem;
+}
+.video-list-con{
+    display: flex;
+    margin-top: .3rem;
+    height: 1.7rem;
+}
+.video-list-con div:nth-child(1) img{
+    width: 2.56rem;
+    height: 1.7rem;
+    margin-right: .2rem;
+ 
+}
+.video-list-con>div:nth-child(2) {
+    font-size: .24rem;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+.video-list-con>div:nth-child(2)>div:nth-child(2){
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: .24rem;
+    height: .29rem;
+    color: #333;
+}
+.video-list-con>div:nth-child(2)>div:nth-child(2) img{
+    width: .31rem;
+    height: .29rem;
+    margin-right: .1rem;
+}
+.video-list-con>div:nth-child(2)>div:nth-child(2) span{
+    height: .29rem;
+    line-height: .29rem;
+    display: inline;
+}

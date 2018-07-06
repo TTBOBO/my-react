@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BScroll from 'better-scroll'
 import connect from '../../store/connnect'
 import './index.css';
+import * as  reacRouter from 'react-router';
 import ArticleList from '../../conponents/article/ArticleList'
 @connect
 class home extends Component {
@@ -184,6 +185,14 @@ class home extends Component {
         this.refs.newCon.style.height = bottomWrapperHeight + "px";
     }
 
+    handClickItem(res){
+        var data = JSON.stringify({
+            id:"1",
+            name:2
+        })
+        this.props.history.push(`/article/${data}`)
+    }
+
     render() {
         return (
             <div style={{ height: '100%' }}>
@@ -200,7 +209,7 @@ class home extends Component {
                         {this.state.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <ArticleList name={'banner'+index} height={this.state.height} dataList={item.dataList}></ArticleList>
+                                    <ArticleList handClickItem={(res) => this.handClickItem(res)} name={'banner'+index} height={this.state.height} dataList={item.dataList}></ArticleList>
                                 </div>)
                             }
                         })}

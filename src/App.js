@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import 'antd-mobile/dist/antd-mobile.css';
 import Tabbar from './conponents/Tabbar/tabbar'
+import connect from './store/connnect'
 
-// import axios from './api/axios'
-import otherurl from './api/otherurl'
+@connect
 class App extends Component {
 	constructor() {
 		super();
@@ -12,6 +12,12 @@ class App extends Component {
 			value: "111"
 		}
 		
+	}
+	componentDidMount(){
+		
+	}
+	componentWillMount(){
+		this.props.getLoginStatus('GETLOGININFO');
 	}
 	
 	render() {
