@@ -15,7 +15,8 @@ class article extends Component {
     componentWillMount() {
         const {match:{params:{id}}} = this.props;
         this.params = id;
-        console.log(JSON.parse(id))
+        console.log(JSON.parse(id));
+        console.log(1)
     }
 
     componentDidMount() {
