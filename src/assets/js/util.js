@@ -1062,6 +1062,40 @@ let utils = {
       qq: u.match(/\sQQ/i) == " qq" //是否QQ
     };
   },
+  getDateDiff: function(dateTimeStamp) {
+		dateTimeStamp = parseInt(new Date(dateTimeStamp)/1000);
+		var minute = 1000 * 60;
+		var hour = minute * 60;
+		var day = hour * 24;
+		var halfamonth = day * 15;
+		var month = day * 30;
+		var now = new Date().getTime();
+		var diffValue = now - dateTimeStamp;
+		if(diffValue < 0) {
+			return;
+		}
+		var result = ""
+		var monthC = diffValue / month;
+		var weekC = diffValue / (7 * day);
+		var dayC = diffValue / day;
+		var hourC = diffValue / hour;
+		var minC = diffValue / minute;
+		if(monthC > 11){
+			result = utils.time.getNowTime(dateTimeStamp);
+		}else if(monthC >= 1) {
+			result = "" + parseInt(monthC) + "月前";
+		} else if(weekC >= 1) {
+			result = "" + parseInt(weekC) + "周前";
+		} else if(dayC >= 1) {
+			result = "" + parseInt(dayC) + "天前";
+		} else if(hourC >= 1) {
+			result = "" + parseInt(hourC) + "小时前";
+		} else if(minC >= 1) {
+			result = "" + parseInt(minC) + "分钟前";
+		} else
+			result = "刚刚";
+		return result;
+	},
 //   version: function () {
 //     var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串 
 //     var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器 

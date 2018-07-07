@@ -17,7 +17,7 @@ class App extends Component {
 		
 	}
 	componentWillMount(){
-		this.props.getLoginStatus('GETLOGININFO');
+		// this.props.getLoginStatus('GETLOGININFO');
 	}
 	
 	render() {

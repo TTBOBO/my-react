@@ -110,7 +110,7 @@ class index extends Component {
         return (
             <div>
                 <Navbar option={navbar}></Navbar>
-                <div className="user-info">
+                <div className="user-info herder-content">
                     <div className="user-info-left">
                         <div className="user-author">
                             <img src={require('../../assets/img/login-bg.jpg')} />

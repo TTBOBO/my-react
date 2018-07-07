@@ -3,6 +3,7 @@ import axios from 'axios';
 import request from './api';
 // import md5 from 'js-md5';
 import otherurl from './otherurl';
+import util from '../assets/js/util'
 
 
 axios.defaults.timeout = 5000;
@@ -47,6 +48,7 @@ axios.interceptors.response.use(
  */
 
 export function ajaxGet(url, params = {}) {
+    params.token = util.getLocalStorage('userinfo') ? JSON.parse(util.getLocalStorage('userinfo')).token : "";
     return new Promise((resolve, reject) => {
         axios.get(request[url],{
             params: params
@@ -64,7 +66,7 @@ export function ajaxGet(url, params = {}) {
  * @param {*Object} params   参数
  */
 export function ajaxPost(url, params = {}) {
-    // params.token = md5(request[url].slice(-10))+md5('qqy').slice(-7);
+    params.token = util.getLocalStorage('userinfo') ? JSON.parse(util.getLocalStorage('userinfo')).token : "";
     return new Promise((resolve, reject) => {
         axios({
             method: 'post',

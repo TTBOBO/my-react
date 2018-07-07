@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BScroll from 'better-scroll'
+import './scroll.css';
 
 import { Icon } from 'antd-mobile';
 

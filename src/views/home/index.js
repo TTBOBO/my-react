@@ -186,11 +186,7 @@ class home extends Component {
     }
 
     handClickItem(res){
-        var data = JSON.stringify({
-            id:"1",
-            name:2
-        })
-        this.props.history.push(`/article/${data}`)
+        this.props.history.push(`/article/${res.id}`)
     }
 
     render() {

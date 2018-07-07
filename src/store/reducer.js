@@ -51,11 +51,13 @@ function getChannel(channel = state.channel,action){
 function getuserinfo(_userinfo = state.userinfo,action){
 	switch (action.type) {
 		case type.GETLOGININFO:
-			let userinfo = util.getLocalStorage('userinfo');
-			state.userinfo = userinfo ? JSON.parse(userinfo) : false;
-			return state.userinfo;
+			// let userinfo = util.getLocalStorage('userinfo');
+			// state.userinfo = userinfo ? JSON.parse(userinfo) : false;
+			return state._userinfo;
 		default:
-			return _userinfo;
+				let userinfo = util.getLocalStorage('userinfo');
+				state.userinfo = userinfo ? JSON.parse(userinfo) : false;
+			return state.userinfo;
 	}
 }
 

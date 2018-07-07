@@ -39,14 +39,14 @@ main {
 }
 
 * {
-	touch-action: none;
+	/* touch-action: none; */
 }
 
 main .content {
 	height: 1000px;
 }
 
-footer {
+.footer {
 	position: fixed;
 	height: .86rem;
 	left: 0;
@@ -193,7 +193,6 @@ body {
 }
 
 .con-bor {
-	width: 6.8rem;
 	/* height: 5.08rem; */
 	border: 1px solid #333;
 	padding: .2rem .47rem .32rem .3rem;
@@ -280,7 +279,7 @@ body {
 }
 
 #send {
-	width: 7.5rem;
+	
 	margin: 0 auto;
 	background: #efefef;
 	display: flex;
@@ -295,7 +294,7 @@ body {
 	color: #ee5f2d;
 }
 
-.input-wrap {
+#send .input-wrap {
 	width: 4.86rem;
 	height: .5rem;
 	border: 1px solid #333;
@@ -314,7 +313,7 @@ body {
 	font-size: .12rem;
 }
 
-.input-wrap>img {
+#send .input-wrap>img {
 	width: .22rem;
 	height: .23rem;
 	margin: 0 .1rem 0 .2rem;

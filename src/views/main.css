@@ -13,6 +13,9 @@
     width: 100%;
     height: 100%;
 }
+.herder-content{
+    margin-top: 45px !important;
+}
 html {font-size: 625%; /*100 ÷ 16 × 100% = 625%*/}
 @media screen and (min-width:360px) and (max-width:374px) and (orientation:portrait) {
     html { font-size: 703%; }
