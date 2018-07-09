@@ -5,7 +5,8 @@ import util from '../assets/js/util'
 const state = {
 	loginStatus:false,
 	loginInfo:"",
-	channel:[],
+	channel:[],  //文章分类
+	vchannel:[],  //视频分类
 	pageList:[],
 	userinfo:{}   //用户信息
 }
@@ -46,6 +47,44 @@ function getChannel(channel = state.channel,action){
 		default:
 			return channel;
 	}
+}
+
+function getVChannel(channel = state.vchannel,action){
+	switch (action.type) {
+		case type.GETVCHANNEL:
+				let _channel = action.params;
+				_channel.forEach((item,index) => {
+					item['page'] = 1;
+					item['isNoMore'] = false;
+					item['dataList'] = [];
+				})
+				state.vchannel = _channel;
+			return state.vchannel;
+		default:
+			return channel;
+	}
+}
+//设置视频分页内容
+function setVPage(page = state.pageList,action){
+	switch (action.type) {
+		case type.ADDVPAGE:
+			state.vchannel[action.params.type].page = action.params.page;
+			if(action.params.isNoMore){
+				state.vchannel[action.params.type].isNoMore = !state.vchannel[action.params.type].isNoMore;
+			}
+			if(action.params.down){  //下拉
+				state.vchannel[action.params.type].dataList = action.params.dataList;
+			}else{  //上拉
+				state.vchannel[action.params.type].dataList.push(...action.params.dataList);
+			}
+			return state.vchannel;
+		case type.SETVNOMORE:
+			state.vchannel = action.params;
+			return state.vchannel;
+		default:
+			return page;
+	}
+	// SETPAGELIST
 }
 
 function getuserinfo(_userinfo = state.userinfo,action){
@@ -92,6 +131,8 @@ const reducer = combineReducers({
 	getloginStatus,
 	getChannel,
 	setPage,
-	getuserinfo
+	getuserinfo,
+	getVChannel,
+	setVPage
 });
 export default reducer;

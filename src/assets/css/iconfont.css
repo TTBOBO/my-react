@@ -1,14 +1,14 @@
 
 @font-face {font-family: "iconfont";
-  src: url('../fonts/iconfont.eot?t=1530589374054'); /* IE9*/
-  src: url('../fonts/iconfont.eot?t=1530589374054#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('../fonts/iconfont.ttf?t=1530589374054') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('../fonts/iconfont.svg?t=1530589374054#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('../fonts/iconfont.eot?t=1531121902350'); /* IE9*/
+  src: url('../fonts/iconfont.eot?t=1531121902350#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.ttf?t=1531121902350') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg?t=1531121902350#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
   font-family:"iconfont" !important;
-  font-size:22px;
+  font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,6 +104,8 @@
 
 .icon-shanchu:before { content: "\e68e"; }
 
+.icon-shipinbofangyingpian2:before { content: "\e78e"; }
+
 .icon-erweima:before { content: "\e7ad"; }
 
 .icon-wode1:before { content: "\e614"; }
@@ -111,6 +113,8 @@
 .icon-heart:before { content: "\e62f"; }
 
 .icon-wode11:before { content: "\e60a"; }
+
+.icon-shipin:before { content: "\e637"; }
 
 .icon-prompt:before { content: "\e6b3"; }
 

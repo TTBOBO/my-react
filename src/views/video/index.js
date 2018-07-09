@@ -3,7 +3,7 @@ import BScroll from 'better-scroll'
 import connect from '../../store/connnect'
 import '../home/index.css';
 import * as  reacRouter from 'react-router';
-import ArticleList from '../../conponents/article/ArticleList'
+import Video from '../../conponents/video/video';
 @connect
 class home extends Component {
     constructor(props) {
@@ -21,11 +21,6 @@ class home extends Component {
     }
     componentDidMount() {
         this.initBanner();
-        if (this.props.getChannel.length !== 0) {
-            // this.initBanner();
-            // this.initScroll();
-            // this.initSwiper();
-        }
         
     }
 
@@ -37,24 +32,23 @@ class home extends Component {
 
 
     initBanner() {
-            React.ajaxPost('get_channel', {
-                username: 18680341334,
-                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9waHAtbGN0dC5vcmciLCJhdWQiOiJodHRwOlwvXC9waHAtbGN0dC5jb20iLCJzdWIiOlt7InVzZXJuYW1lIjoiMTg2ODAzNDEzMzQiLCJ0aW1lIjoxNTMwNzU0ODYzfV0sImlhdCI6MTUzMDc1NDg2M30.gDONKdP6HUVeDJCoFdrlweni4FbionwOa_DU3oNW8Oo"
-            }).then(res => {
-                let arr = [...res.data];
-                this.props.get_channel('GETCHANNEL', arr);
-                this.setState({
-                    getChannel :this.props.getChannel
-                })
-                this.getList(3); //获取栏目内容
-                this.initScroll(); //初始化 横向滚动栏
-                this.initSwiper(); //初始化横向滚动栏宽度
+        React.ajaxGet('channelList', {}).then(res => {
+            let arr = [...res];
+            this.props.get_vchannel('GETVCHANNEL', arr);
+            console.log(this.props.getVChannel)
+            this.setState({
+                getChannel :this.props.getVChannel
             })
+            this.getList(3); //获取栏目内容
+            this.initScroll(); //初始化 横向滚动栏
+            this.initSwiper(); //初始化横向滚动栏宽度
+        })
+        
     }
 
     initScroll() {
         this.children = this.refs.ul.children;
-        this.refs.ul.style.width = this.props.getChannel.length * 1.2 + "rem";
+        this.refs.ul.style.width = this.props.getVChannel.length * 1.2 + "rem";
         this.scroll = new BScroll(this.refs.topWrapper, {
             scrollX: true,
             scrollY: false,
@@ -140,24 +134,30 @@ class home extends Component {
     }
     // 1下拉  2 上拉  3左右切换
     getList(status){
-        if(this.props.getChannel[this.state.currentPage].dataList.length !== 0 && status == 3){
+        if(!this.props.getVChannel[this.state.currentPage]){
             return false;
         }
-        React.ajaxPost('news', {
-            type: this.state.currentPage+1,  //this.props.getChannel[this.state.currentPage].id
-            page: this.props.getChannel[this.state.currentPage].page
+        
+        if(this.props.getVChannel[this.state.currentPage].dataList.length !== 0 && status == 3){
+            return false;
+        }
+        React.ajaxGet('videoList', {
+            channel_id: this.props.getVChannel[this.state.currentPage].id,  //this.props.getChannel[this.state.currentPage].id
+            page: this.props.getVChannel[this.state.currentPage].page,
+            limit:10,
+            keyword:""
         }).then(res => {
             let obj = {
-                page:res.data.current_page,
+                page:res.current_page,
                 type:this.state.currentPage,
-                dataList:res.data.data
+                dataList:res.data
             }
             if(res.data.current_page == res.data.last_page){
                 obj.isNoMore = true
             }
-            this.props.addpage('ADDPAGE',obj);
+            this.props.addVpage('ADDVPAGE',obj);
             this.setState({
-                getChannel :this.props.getChannel
+                getChannel :this.props.getVChannel
             })
         })
     }
@@ -176,7 +176,7 @@ class home extends Component {
         })
         let newItemW = 0;
         let child = null;
-        for (let i = 0; i < this.props.getChannel.length; i++) {
+        for (let i = 0; i < this.props.getVChannel.length; i++) {
             child = this.state.childrenCon[i];
             child.style.width = bottomWrapperWidth + "px";
             newItemW += bottomWrapperWidth;
@@ -205,7 +205,7 @@ class home extends Component {
                         {this.state.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <ArticleList handClickItem={(res) => this.handClickItem(res)} name={'banner'+index} height={this.state.height} dataList={item.dataList}></ArticleList>
+                                    <Video></Video>
                                 </div>)
                             }
                         })}

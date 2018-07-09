@@ -62,7 +62,6 @@ class Scroll extends Component {
             pullUpLoad: this.props.pullUpLoad
         };
         this.scroll = new BScroll(this.Wrapper, option);
-        console.log(this.scroll)
         //
         if (this.props.pullDownRefresh) {
             this._initPullDownRefresh();

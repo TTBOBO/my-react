@@ -1,0 +1,11 @@
+.video-con{
+    width: 100%;
+    margin: 0;
+    
+}
+
+.video-item{
+    width: 100%;
+    height: 3.4rem;
+    background: rebeccapurple;
+}

@@ -8,7 +8,9 @@ const REQUEST = {
   getAdvertisement:'/api/Newsdetail/getAdvertisement',  //文章详情广告
   acomment:'/api/Newsdetail/comment', //文章详情评论
   groom:"/api/Newsdetail/groom",
-  write_comment:'/api/Newsdetail/write_comment'
+  write_comment:'/api/Newsdetail/write_comment',
+  channelList:"/api/Videolist/channelList",
+  videoList:"/api/Videolist/video"
 }
 
 export default REQUEST;

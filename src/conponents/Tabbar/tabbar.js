@@ -22,8 +22,8 @@ class tabbar extends Component {
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
                 title: "视频",
                 key: "/video",
-                icon:"icon iconfont icon-shouye",
-                selectIcon:"icon iconfont icon-shouyefill"
+                icon:"icon iconfont icon-shipin",
+                selectIcon:"icon iconfont icon-shipinbofangyingpian2"
             },{
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
