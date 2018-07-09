@@ -16,7 +16,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(
     config => {
         config.headers = {
-            'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8'
+            'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8',
         }
         return config;
     },
@@ -24,6 +24,8 @@ axios.interceptors.request.use(
         return Promise.reject(err);
     }
 )
+
+
 /**
  * 请求拦截
  */
@@ -82,7 +84,6 @@ export function ajaxPost(url, params = {}) {
         }).then(response => {
             resolve(response);
         }).catch(err => {
-
             reject(err);
         });
     })

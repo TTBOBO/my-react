@@ -19,6 +19,7 @@ class Scroll extends Component {
             pullDownInitTop: -50,  //刷新完文件回到原来的位子
         }
     }
+    
 
     componentDidMount() {
         this.Wrapper = this.refs.scroll;
@@ -26,6 +27,8 @@ class Scroll extends Component {
             this.initScroll();  //初始化  better-scroll
         })
     }
+
+    
 
     initScroll() {
         if (!this.Wrapper) {
@@ -112,9 +115,6 @@ class Scroll extends Component {
             // this.globel.newsList[this.globel.currentPage].scrollTop = pos.y;
         })
     }
-    test(){
-        alert(1111)
-    }
     _initPullUpLoad() {
         this.scroll.on("pullingUp", () => {
             this.setState({
@@ -123,7 +123,9 @@ class Scroll extends Component {
             // this.$emit("pullingUp");
             if (!this.props.isNoMore) {
                 // this.props.pageObj.page += 1;
-               
+                setTimeout(() => {
+                    this.forceUpdate();
+                }, 300)
                 this.initPage(this.props.pageObj.page);
             } else {
                 setTimeout(() => {
@@ -136,7 +138,6 @@ class Scroll extends Component {
     initPage(page) {
         this.props.pageObj.page = page ? page : 1;
         this.props.loadMore(111)
-        // this.$emit("loadMore", this.props.pageObj);
     }
     forceUpdate(dirty) {
         if (this.props.pullDownRefresh && this.state.isPullingDown) {
@@ -199,6 +200,7 @@ class Scroll extends Component {
     gettext() {
         const moreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.more;
         const noMoreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.noMore;
+        console.log(this.state.pullUpDirty)
         return this.state.pullUpDirty ? moreTxt : noMoreTxt;
     }
 
