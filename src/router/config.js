@@ -8,6 +8,11 @@ export const loyoutRouterMap = [
         name:"首页",
         exact:true,
         component:_import_views("home")
+    },{
+        path:"/video",
+        name:"视频",
+        exact:true,
+        component:_import_views("video")
     },
     {
         path:"/cart",

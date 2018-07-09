@@ -62,6 +62,7 @@ class Scroll extends Component {
             pullUpLoad: this.props.pullUpLoad
         };
         this.scroll = new BScroll(this.Wrapper, option);
+        console.log(this.scroll)
         //
         if (this.props.pullDownRefresh) {
             this._initPullDownRefresh();
@@ -200,13 +201,13 @@ class Scroll extends Component {
     gettext() {
         const moreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.more;
         const noMoreTxt = this.props.pullUpLoad && this.props.pullUpLoad.txt && this.props.pullUpLoad.txt.noMore;
-        console.log(this.state.pullUpDirty)
+
         return this.state.pullUpDirty ? moreTxt : noMoreTxt;
     }
 
     //反向设置  数据有无更多数据
     setNoMore() {
-        this.setState({pullUpDirty:!this.state.pullUpDirty});
+        this.setState({pullUpDirty:false});
     }
 
 
@@ -225,6 +226,13 @@ class Scroll extends Component {
         return (<div className="after-trigger">
             {this.state.isPullingDown ? <div className="loading"><Icon type="loading" /></div> : <div><span className="refresh-txt">{this.state.refreshTxt}</span></div>}
         </div>)
+    }
+
+
+    scrollTo(x,y,time){
+        if(this.scroll){
+            this.scroll.scrollTo(x,y,time);
+        }
     }
 
     

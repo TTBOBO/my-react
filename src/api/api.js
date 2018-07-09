@@ -7,7 +7,8 @@ const REQUEST = {
   news_rand:'/api/Newsdetail/news_rand',  //文章详情3条随机文字广告
   getAdvertisement:'/api/Newsdetail/getAdvertisement',  //文章详情广告
   acomment:'/api/Newsdetail/comment', //文章详情评论
-  groom:"/api/Newsdetail/groom"
+  groom:"/api/Newsdetail/groom",
+  write_comment:'/api/Newsdetail/write_comment'
 }
 
 export default REQUEST;

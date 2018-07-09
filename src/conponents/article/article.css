@@ -20,6 +20,7 @@
 }
 .shop-text{
     position: relative;
+    flex: 1;
     margin-right: 0.38rem;
 }
 .shop-text>p:nth-child(1) {

@@ -3,6 +3,7 @@ import './news.css';
 import Navbar from '../../conponents/navbar/navBar';
 import Scroll from '../../conponents/Scroll/Scroll'
 import { Toast } from 'antd-mobile';
+import Sheet from '../../conponents/actionSheet/actionSheet'
 import { withRouter } from 'react-router-dom'
 import connect from '../../store/connnect'
 import util from '../../assets/js/util';
@@ -35,7 +36,8 @@ class article extends Component {
 
     componentDidMount() {
         this.initArticleinfo();  //初始化 文章详情
-        this.getFeedback()
+        this.getFeedback();
+        
     }
 
     componentWillReceiveProps(nextProps) {
@@ -63,6 +65,9 @@ class article extends Component {
             //     $('.canvas-box').show()
             //     that.InitCanvas();
             // }		
+            setTimeout(() => {
+                this.refs.sheet.showActionSheet();
+            },2000)
 
         })
     }
@@ -75,6 +80,7 @@ class article extends Component {
             this.setState({
                 AdInfo: res.data.data
             })
+            this.feedScrollTop = this.refs.listWrap.offsetTop;
         })
     }
 
@@ -85,6 +91,7 @@ class article extends Component {
             this.setState({
                 news_rand: res
             })
+            
         })
     }
 
@@ -95,14 +102,16 @@ class article extends Component {
             limit: this.state.pageList.limit
         }).then(res => {
             //刷新评论数量大于0时    page加1
+            let _page = res.current_page;
             if (res.data.length == 0 || res.data.length < this.state.pageList.limit) {
                 setTimeout(() => {
-                    this.ref.scroll.setNoMore();
+                    this.refs.scroll.setNoMore();
                     this.refs.scroll.refresh();
                 }, 1000)
-                return false;
+            }else{
+                _page += 1;
             }
-            let _page = res.current_page +1;
+            
             let data = res.data.map((item) => {
                 item.isZan = item.user.indexOf(this.props.getuserinfo.id) != -1 ? true : false
                 return item;
@@ -111,7 +120,6 @@ class article extends Component {
                 pageList: Object.assign(this.state.pageList, { page: _page,isNoMore:res.data.length < this.state.pageList.limit ? true : false }),
                 feedList: data
             })
-            console.log(this.state.pageList);
         })
     }
 
@@ -179,6 +187,34 @@ class article extends Component {
         })
     }
 
+    makeFeedback(e){
+        let feedVal = this.refs.feed.value;
+        console.log(this.refs.feed.value);
+        if (!this.props.getuserinfo){
+            Toast.info("请登录再评论",2,null,false);
+            return false;
+        }
+        if(feedVal.length > 150) {
+            Toast.info("最多字数为150",2,null,false);
+            return false;
+        } else if(feedVal.length == 0) {
+            Toast.info("请输入评语再评论",2,null,false);
+            return false;
+        }
+        React.ajaxGet('write_comment',{
+            news_id: this.params,
+            user_id: this.props.getuserinfo.id,
+            comment: feedVal
+        }).then(res => {
+            Toast.info("评论成功",2,null,false);
+            this.getFeedback();
+            feedVal = "";
+        })
+       
+    }
+    scrollTo(){
+        this.refs.scroll.scrollTo(0,-this.feedScrollTop,200);
+    }
 
     initList(num) {
         console.log(num)
@@ -247,7 +283,7 @@ class article extends Component {
                                     }
 
                                 </div>
-                                <div className="con-list-wrap">
+                                <div className="con-list-wrap" ref="listWrap">
                                     <span className="con-list-title">相关评论</span>
                                     <div className="feed-back">
                                         {this.state.feedList.map((item, index) => {
@@ -285,11 +321,11 @@ class article extends Component {
                     <div id="send" className="footer">
                         <div className="input-wrap">
                             <img src={require('../../assets/img/feedback1.png')} alt="" />
-                            <input type="text" placeholder="写评论" id="ipt" />
-                            <div className="send">发布</div>
+                            <input type="text" placeholder="写评论" id="ipt" ref="feed" />
+                            <div className="send"  onClick={(e) => this.makeFeedback(e)}>发布</div>
                         </div>
-                        <span><img src={require('../../assets/img/feedback.png')} alt="" className="plsl" /></span>
-                        <span className="plnub" detail="comment"></span>
+                        <span onClick={() => this.scrollTo()}><img src={require('../../assets/img/feedback.png')} alt="" className="plsl" /></span>
+                        <span className="plnub" detail="comment"> {this.state.articleInfo['comment']}</span>
                         <span id="share"><img src={require('../../assets/img/icon_share.png')} alt="" className="share-b" /></span>
                     </div>
                     <div className="canvas">
@@ -297,6 +333,7 @@ class article extends Component {
                             <canvas width="320" height="320" id="yuan" style={{ width: '80px', height: '80px' }}></canvas>
                         </div>
                     </div>
+                    <Sheet ref="sheet"></Sheet>
                 </div>
             </div>
         );

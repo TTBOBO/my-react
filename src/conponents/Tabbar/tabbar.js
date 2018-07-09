@@ -17,14 +17,14 @@ class tabbar extends Component {
                 key: "/",
                 icon:"icon iconfont icon-shouye",
                 selectIcon:"icon iconfont icon-shouyefill"
-            },
-            //  {
-            //     bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
-            //     seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
-            //     title: "发现",
-            //     key: "find"
-            // },
-             {
+            },{
+                bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
+                seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
+                title: "视频",
+                key: "/video",
+                icon:"icon iconfont icon-shouye",
+                selectIcon:"icon iconfont icon-shouyefill"
+            },{
                 bg: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat",
                 seBg: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat",
                 title: "购物车",
