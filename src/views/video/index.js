@@ -159,6 +159,7 @@ class home extends Component {
             this.setState({
                 getChannel :this.props.getVChannel
             })
+            
         })
     }
 
@@ -205,7 +206,7 @@ class home extends Component {
                         {this.state.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <Video></Video>
+                                    <Video handClickItem={(res) => this.handClickItem(res)} name={'banner'+index} height={this.state.height} dataList={item.dataList}></Video>
                                 </div>)
                             }
                         })}
