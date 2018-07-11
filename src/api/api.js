@@ -10,7 +10,10 @@ const REQUEST = {
   groom:"/api/Newsdetail/groom",
   write_comment:'/api/Newsdetail/write_comment',
   channelList:"/api/Videolist/channelList",
-  videoList:"/api/Videolist/video"
+  videoList:"/api/Videolist/video",
+  videoDetail:'/api/video/videoDetail',
+  video_rand:'/api/video/video_rand',
+  vcomment: '/api/video/comment'
 }
 
 export default REQUEST;

@@ -25,7 +25,10 @@ class video extends Component {
     }
     
     handVideo(item,index){
-        console.log(item,index);
+        if(typeof this.props.handClickItem === 'function'){
+            this.props.handClickItem(item,index);
+        }
+       
     }
 
     render() {

@@ -65,9 +65,9 @@ class article extends Component {
             //     $('.canvas-box').show()
             //     that.InitCanvas();
             // }		
-            setTimeout(() => {
-                this.refs.sheet.showActionSheet();
-            },2000)
+            // setTimeout(() => {
+            //     this.refs.sheet.showActionSheet();
+            // },2000)
 
         })
     }

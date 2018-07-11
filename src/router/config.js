@@ -38,6 +38,10 @@ export const otherRouterMap = [
         path:"/article/:id",
         name:"文章详情",
         component:_import_views("article/article")
+    },{
+        path:"/videoinfo/:id",
+        name:"视频详情",
+        component:_import_views("article/video")
     },
 ];
 

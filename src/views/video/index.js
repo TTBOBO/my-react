@@ -186,8 +186,8 @@ class home extends Component {
         this.refs.newCon.style.height = bottomWrapperHeight + "px";
     }
 
-    handClickItem(res){
-        this.props.history.push(`/article/${res.id}`)
+    handClickItem(res,index){
+        this.props.history.push(`/videoinfo/${res.id}`);
     }
 
     render() {
@@ -206,7 +206,7 @@ class home extends Component {
                         {this.state.getChannel.map((item, index) => {
                             if(this.state.height){
                                 return (<div key={index} className="newsList" >
-                                    <Video handClickItem={(res) => this.handClickItem(res)} name={'banner'+index} height={this.state.height} dataList={item.dataList}></Video>
+                                    <Video handClickItem={(res,_index) => this.handClickItem(res,_index)} name={'banner'+index} height={this.state.height} dataList={item.dataList}></Video>
                                 </div>)
                             }
                         })}
