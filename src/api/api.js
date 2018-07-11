@@ -13,7 +13,8 @@ const REQUEST = {
   videoList:"/api/Videolist/video",
   videoDetail:'/api/video/videoDetail',
   video_rand:'/api/video/video_rand',
-  vcomment: '/api/video/comment'
+  vcomment: '/api/video/comment',
+  vgroom:'/api/video/groom'
 }
 
 export default REQUEST;

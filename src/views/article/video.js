@@ -134,6 +134,42 @@ class video extends Component {
         })
     }
 
+    clickZan(option) {
+        var status;
+        if(option.type == 1){  //文章点赞
+            status = this.state.isZanStatus ? 0 : 1;
+        }else{//评论点赞
+            status = option.src ? 0 : 1;
+            // return false;
+        }
+        var data = {
+            user_id: this.props.getuserinfo.id,
+            type: option.type || 1,
+            status: status
+        };
+        option.type == 1 ? data.video_id = option.news_id : data.comment_id = option.news_id;
+        React.ajaxGet('vgroom', data).then(res => {
+            if (option.type == 1) {  //文章点赞
+                this.setState({
+                    isZanStatus: this.state.isZanStatus ? false : true,
+                    articleInfo: Object.assign(this.state.articleInfo, { groom: res })
+                })
+            } else {   //评论点赞
+                let _res = this.state.feedList.map((item,index) => {
+                    if(index == option.index){
+                        item.isZan = option.src ? false : true;
+                        item.groom = res;
+                        return item;
+                    }
+                    return item;
+                })
+                this.setState({
+                    feedList:_res
+                })
+            }
+        })
+    }
+
     
 
     render() {
@@ -154,7 +190,15 @@ class video extends Component {
                                 <div className="news-title">{this.state.videoinfo.title}</div>
                                 <div className="news-views-video">
                                     <div><span>来源于</span><span className="source">{this.state.videoinfo.source}</span></div>
-                                    <div className="review-zan-info"><img className="news-zan" src={this.state.isZanStatus ? require("../../assets/img/iszan.png") : require("../../assets/img/zan.png")} alt="" /> <span className="groom"></span></div>
+                                    <div className="review-zan-info"   onClick={() => this.clickZan(
+                                            {
+                                                news_id: this.params,
+                                                type: 1,
+                                                src: this.state.articleInfo['user'],
+                                            }
+                                        )}>
+                                        <img className="news-zan" src={this.state.isZanStatus ? require("../../assets/img/iszan.png") : require("../../assets/img/zan.png")} alt="" />
+                                         <span className="groom">{this.state.videoinfo.groom}</span></div>
                                 </div>
                             </div>
                             <div className="views-list">
@@ -181,7 +225,16 @@ class video extends Component {
                                                 <div className="review-right">
                                                     <div className="review-name-wrap">
                                                         <div>{item.nickname}</div>
-                                                        <div><span className="review-zan"><img src={item.isZan ? require("../../assets/img/iszan.png") : require("../../assets/img/zan.png")} alt="" /><span detail="groom">{item.groom}</span></span></div>
+                                                        <div><span className="review-zan" onClick={() => this.clickZan(
+                                                            {
+                                                                news_id: item.id,
+                                                                type: 2,
+                                                                src: item.isZan,
+                                                                index:index
+                                                            }
+                                                        )}>
+                                                            <img src={item.isZan ? require("../../assets/img/iszan.png") : require("../../assets/img/zan.png")} alt="" />
+                                                        <span detail="groom">{item.groom}</span></span></div>
                                                     </div>
                                                     <div className="review-con">
                                                     {item.contents}
