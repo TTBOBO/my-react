@@ -123,8 +123,7 @@ class video extends Component {
                 _page += 1;
             }
             let data = res.data.map((item) => {
-                
-                item.isZan = item.groom_user && item.groom_user.indexOf(this.props.getuserinfo.id) != -1 ? true : false
+                item.isZan = item.groom_user && item.groom_user == this.props.getuserinfo.id ? true : false
                 return item;
             })
             this.setState({
