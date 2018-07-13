@@ -38,7 +38,7 @@ class video extends Component {
                     {this.props.dataList.map((item,index) => {
                         return (<div className="video-item" key={index}>
                         <div className="video-title" onClick={() => this.handVideo(item,index)}>{item.title}</div>
-                        <div className="video-box"><video className="video-video" src={item.video_url} controls="controls"></video></div>
+                        <div className="video-box"><video className="video-video" src={item.video_url}  poster={item.thumb} controls="controls"></video></div>
                         <div className="video-footer">
                             <div className="avatar-con">
                                 <img  src={item.avatars}  />

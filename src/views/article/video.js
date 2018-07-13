@@ -68,7 +68,7 @@ class video extends Component {
         }
         if (!this.props.getuserinfo)
             this.setState({ isZanStatus: false })
-        if (zanArr.indexOf(this.props.getuserinfo.id) != -1) {
+        if (zanArr == this.props.getuserinfo.id) {
             this.setState({
                 isZanStatus: true
             })
@@ -185,7 +185,7 @@ class video extends Component {
                 <Scroll ref="scroll" isNoMore={this.state.pageList.isNoMore} loadMore={(num) => this.initList(num)} pullDownRefresh={false} header={true} >
                     <div id="content">
                         <div >
-                            <video src={this.state.videoinfo.video_url} controls="controls" className="video-video"></video>
+                            <video src={this.state.videoinfo.video_url} controls="controls" poster={this.state.videoinfo.thumb} className="video-video"></video>
                             <div className="con-news">
                                 <div className="news-title">{this.state.videoinfo.title}</div>
                                 <div className="news-views-video">

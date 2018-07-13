@@ -42,7 +42,15 @@ export const otherRouterMap = [
         path:"/videoinfo/:id",
         name:"视频详情",
         component:_import_views("article/video")
-    },
+    },{
+        path:"/timeArticle",
+        name:"视频24小时资讯",
+        component:_import_views("timeArticle/timeArticle")
+    },{
+        path:"/searArticle",
+        name:"搜索资讯",
+        component:_import_views("searArticle/searArticle")
+    }
 ];
 
 export const routes = loyoutRouterMap.concat(otherRouterMap);

@@ -34,7 +34,8 @@ class login extends Component {
         }
         React.ajaxPost('login', {
             mobile: this.state.mobile,
-            yzm:this.state.yzm
+            yzm:this.state.yzm,
+            imei: "0B916C62-03CD-46B7-8DD7-8E86309427E8"
         }).then(res => {
             if(res.status == 'success') {
                 Toast.info("登录成功",2,null,false);

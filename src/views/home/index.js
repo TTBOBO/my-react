@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import BScroll from 'better-scroll'
 import connect from '../../store/connnect'
+import { withRouter } from 'react-router-dom'
 import './index.css';
 import * as  reacRouter from 'react-router';
 import ArticleList from '../../conponents/article/ArticleList'
 @connect
+@withRouter
 class home extends Component {
     constructor(props) {
         super(props);
@@ -38,8 +40,8 @@ class home extends Component {
 
     initBanner() {
             React.ajaxPost('get_channel', {
-                username: 18680341334,
-                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9waHAtbGN0dC5vcmciLCJhdWQiOiJodHRwOlwvXC9waHAtbGN0dC5jb20iLCJzdWIiOlt7InVzZXJuYW1lIjoiMTg2ODAzNDEzMzQiLCJ0aW1lIjoxNTMwNzU0ODYzfV0sImlhdCI6MTUzMDc1NDg2M30.gDONKdP6HUVeDJCoFdrlweni4FbionwOa_DU3oNW8Oo"
+                username: this.props.getuserinfo.username,
+                token: this.props.getuserinfo.token
             }).then(res => {
                 let arr = [...res.data];
                 this.props.get_channel('GETCHANNEL', arr);
@@ -51,6 +53,8 @@ class home extends Component {
                 this.initSwiper(); //初始化横向滚动栏宽度
             })
     }
+
+   
 
     initScroll() {
         this.children = this.refs.ul.children;
@@ -147,18 +151,22 @@ class home extends Component {
             type: this.state.currentPage+1,  //this.props.getChannel[this.state.currentPage].id
             page: this.props.getChannel[this.state.currentPage].page
         }).then(res => {
-            let obj = {
-                page:res.data.current_page,
-                type:this.state.currentPage,
-                dataList:res.data.data
+            if(res.data){
+                let obj = {
+                    page:res.data ? (res.data.current_page || 1) : 1,
+                    type:this.state.currentPage,
+                    dataList:res.data.data
+                }
+                if(res.data.current_page == res.data.last_page){
+                    obj.isNoMore = true
+                }
+                this.props.addpage('ADDPAGE',obj);
+                this.setState({
+                    getChannel :this.props.getChannel
+                })
+            }else{
+
             }
-            if(res.data.current_page == res.data.last_page){
-                obj.isNoMore = true
-            }
-            this.props.addpage('ADDPAGE',obj);
-            this.setState({
-                getChannel :this.props.getChannel
-            })
         })
     }
 
@@ -185,13 +193,30 @@ class home extends Component {
         this.refs.newCon.style.height = bottomWrapperHeight + "px";
     }
 
+    
+
     handClickItem(res){
-        this.props.history.push(`/article/${res.id}`)
+        this.props.history.push(`/article/${res.id}`);
+    }
+
+    handSearch(){
+        this.props.history.push(`/searArticle`);
+    }
+
+    handTime(){
+        this.props.history.push(`/timeArticle`);
     }
 
     render() {
         return (
             <div style={{ height: '100%' }}>
+                <div className="header-tool">
+                    <span className="iconfont icon-tongzhi left" onClick={() => this.handTime()}></span>
+                    <div  className="iconfont icon-tongzhi input" onClick={() => this.handSearch()}>
+                        <div className="search-con"></div>
+                    </div>
+                    <span className="iconfont icon-tongzhi right"></span>
+                </div>
                 <div className="topWrapper" ref="topWrapper">
                     <ul ref="ul" style={{position:'relative'}}>
                         {this.state.getChannel.map((item, index) => {
