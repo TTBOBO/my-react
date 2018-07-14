@@ -42,9 +42,8 @@ class ArticleList extends Component {
 
 
         return (
-            <div style={{ height: '100%' }} id="article-view">
-            
-                <Scroll ref="scroll" loadMore={(num) => this.initList(num)}  curHeight={1}>
+            <div style={{ height: '100%' }} className={this.props.header ? 'content' : ''} id="article-view">
+                <Scroll ref="scroll" loadMore={(num) => this.initList(num)} header={this.props.header}  curHeight={1}>
                     <div className="shopList" id="shopList">
                         {this.props.dataList.map((item, index) => {
                             if(item.allimgs && item.allimgs.length > 0){

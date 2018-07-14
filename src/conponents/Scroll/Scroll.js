@@ -39,7 +39,9 @@ class Scroll extends Component {
             //+1  超出屏幕最大高度才会有效果      this.header  当有顶部时
             if (this.props.header) { 
                 // return false;
+                console.log(this.Wrapper.parentNode.parentNode)
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - 45) + "px";
+                console.log(this.Wrapper.style.height)
                 this.refs.scrollList.style.minHeight = (this.Wrapper.parentNode.parentNode.clientHeight - 44) + "px";
             } else if (this.props.curHeight) {   //当容器自定义高度时  需传一个高度进来
                 this.Wrapper.style.height = (this.Wrapper.parentNode.parentNode.clientHeight - this.props.curHeight) + "px";
@@ -240,7 +242,7 @@ class Scroll extends Component {
         //onClick={() => this.handClick(index)}
         return (
             <div style={{height:'100%'}}>
-                <div ref="scroll" style={{ overflow: "hidden", position: 'relative' }}>
+                <div ref="scroll"  style={{ overflow: "hidden", position: 'relative' }}>
                     <div className="scroll-content newsCon" id="scroll-content" >
                         <div ref="scrollList">
                             {

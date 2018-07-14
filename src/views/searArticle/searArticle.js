@@ -51,6 +51,7 @@ class searArticle extends Component {
             searchStatus:this.state.arr.length > 3 ? false :true,
             value:""
         })
+        this.props.history.push(`/searResult/${e}`);
     }
 
     setMore() {

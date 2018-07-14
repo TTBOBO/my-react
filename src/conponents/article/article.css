@@ -12,6 +12,14 @@
     background: #fff;
 }
 
+.content{
+    position: absolute;
+    top: 45px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .shop-list-con img {
     width: 1.94rem;
     height: 1.4rem;
