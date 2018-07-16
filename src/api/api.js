@@ -15,7 +15,8 @@ const REQUEST = {
   video_rand:'/api/video/video_rand',
   vcomment: '/api/video/comment',
   vgroom:'/api/video/groom',
-  search:'/api/news/search'
+  search:'/api/news/search', //搜索文章
+  hot_news:'/api/news/hot_news',  //24小时热文
 }
 
 export default REQUEST;

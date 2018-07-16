@@ -116,7 +116,7 @@ class searArticle extends Component {
                        {
                            this.state.arr.map((item,index) => {
                               if(index < this.state.seeCount){
-                                return ( <li key={index}><div className="con"><div><span className="iconfont icon-biaoxing "></span><span>{item}</span></div><span onClick={() => this.delHis(index)} className="iconfont icon-shanchu del-icon "></span></div></li>)
+                                return ( <li key={index}><div className="con"><div onClick={() => this.onSubmit(item)} style={{flex:"1"}}><span className="iconfont icon-biaoxing "></span><span>{item}</span></div><span onClick={() => this.delHis(index)} className="iconfont icon-shanchu del-icon "></span></div></li>)
                               }
                            })
                        }

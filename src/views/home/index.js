@@ -40,8 +40,8 @@ class home extends Component {
 
     initBanner() {
             React.ajaxPost('get_channel', {
-                username: this.props.getuserinfo.username,
-                token: this.props.getuserinfo.token
+                // username: this.props.getuserinfo.username,
+                // token: this.props.getuserinfo.token
             }).then(res => {
                 let arr = [...res.data];
                 this.props.get_channel('GETCHANNEL', arr);
