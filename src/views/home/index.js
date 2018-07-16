@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BScroll from 'better-scroll'
 import connect from '../../store/connnect'
 import { withRouter } from 'react-router-dom'
+import { Toast} from 'antd-mobile';
 import './index.css';
 import * as  reacRouter from 'react-router';
 import ArticleList from '../../conponents/article/ArticleList'
@@ -207,6 +208,10 @@ class home extends Component {
         this.props.history.push(`/timeArticle`);
     }
 
+    handAdd(){
+        Toast.info("该模块暂未开发，请等待！",2,null,false);
+    }
+
     render() {
         return (
             <div style={{ height: '100%' }}>
@@ -217,14 +222,18 @@ class home extends Component {
                     </div>
                     <span className="iconfont icon-tongzhi right"></span>
                 </div>
-                <div className="topWrapper" ref="topWrapper">
-                    <ul ref="ul" style={{position:'relative'}}>
-                        {this.state.getChannel.map((item, index) => {
-                            return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
-                        })}
-                        <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
-                    </ul>
+                <div className="top-tool">
+                    <div className="topWrapper" ref="topWrapper">
+                        <ul ref="ul" style={{position:'relative'}}>
+                            {this.state.getChannel.map((item, index) => {
+                                return (<li className={this.state.currentPage == index ? 'top-active' : ''} key={index} onClick={() => {this.activeLi(index)}}>{item.name}</li>)
+                            })}
+                            <div className="bottom-line" style={{ left: this.state.left + 'rem' }}></div>
+                        </ul>
+                    </div>
+                    <span className="iconfont icon-jiahao1" onClick={() => this.handAdd()}></span>
                 </div>
+                
                 <div className="bottomWrapper container" ref="bottomWrapper">
                     <div ref="newCon" >
                         {this.state.getChannel.map((item, index) => {

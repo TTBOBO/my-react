@@ -126,25 +126,28 @@ class index extends Component {
             ltype:""
         }
         return (
-            <div>
+            <div style={{height:'calc(100% -45px)'}}>
                 <Navbar option={navbar}></Navbar>
-                <div className="user-info herder-content">
-                    <div className="user-info-left">
-                        <div className="user-author">
-                            <img src={require('../../assets/img/login-bg.jpg')} />
+                <div className=" herder-content">
+                    <div className="user-info">
+                        <div className="user-info-left">
+                            <div className="user-author">
+                                <img src={require('../../assets/img/login-bg.jpg')} />
+                            </div>
+                            <div className="user-author-info">
+                            {this.getLoginStatus()}
+                            </div>
                         </div>
-                        <div className="user-author-info">
-                           {this.getLoginStatus()}
+                        <div className="user-info-right">
+                            <span onClick={() => this.goSetting()} className="iconfont icon-shezhi"></span>
                         </div>
                     </div>
-                    <div className="user-info-right">
-                        <span onClick={() => this.goSetting()} className="iconfont icon-shezhi"></span>
-                    </div>
+                    <div className="h-line-5"></div>
+                    <Navlist navList={this.state.navList}></Navlist>
+                    <div className="h-line-5"></div>
+                    <Navlist navList={this.state.otherList}></Navlist>
                 </div>
-                <div className="h-line-5"></div>
-                <Navlist navList={this.state.navList}></Navlist>
-                <div className="h-line-5"></div>
-                <Navlist navList={this.state.otherList}></Navlist>
+                
                 
                 {/* <CellSwiper listData={this.state.listData} handler={(index) => this.handler(index)}></CellSwiper> */}
             </div>
