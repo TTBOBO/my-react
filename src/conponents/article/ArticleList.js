@@ -21,11 +21,11 @@ class ArticleList extends Component {
     }
 
     initList(num) {
-        console.log(num)
+        // console.log(num)
     }
 
     componentWillReceiveProps(props){
-        console.log(props);
+        // console.log(props);
     }
 
 

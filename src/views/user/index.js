@@ -15,7 +15,7 @@ class index extends Component {
         this.state = {
             navList:[{
                 thumb:this.getIcon("icon-dingdan"),  //icon
-                title:"我要提现",  //tile
+                title:"我的师徒",  //tile
                 Brief:"",  //subTitle
                 isLogin:true,  //监听登录
                 callBack:this.getResult.bind(this),  //父组件自己事件
@@ -25,12 +25,14 @@ class index extends Component {
                 title:"喜欢的文章",  //tile
                 Brief:"",  //subTitle
                 isLogin:true,  //监听登录
+                isMake:true,
                 callBack:this.getResult.bind(this),  //父组件自己事件
                 path:""  //跳转路由
             },{
                 thumb:this.getIcon("icon-biaoxing"),
                 title:"浏览过的文章",
                 Brief:"",
+                isMake:true,
                 callBack:this.getResult.bind(this),  //父组件自己事件
                 isLogin:false
             }],
@@ -38,13 +40,15 @@ class index extends Component {
                 thumb:this.getIcon("icon-sale"),
                 title:"意见反馈",
                 Brief:"",
-                // callBack:this.getResult.bind(this),  //父组件自己事件
+                isMake:true,
+                callBack:this.getResult.bind(this),  //父组件自己事件
                 isLogin:true
             },{
                 thumb:this.getIcon("icon-tishi"),
+                isMake:true,
                 title:"关于我们",
                 Brief:"",
-                // callBack:this.getResult.bind(this),  //父组件自己事件
+                callBack:this.getResult.bind(this),  //父组件自己事件
                 isLogin:true
             }],
             userinfo:{}
@@ -76,7 +80,7 @@ class index extends Component {
     }
     
     getResult(res){
-        if(res.isLogin){
+        if(res.isLogin && !this.props.getuserinfo){
             Toast.info("请登录再操作",2,null,false);
             this.props.history.push({
                 pathname:"/login",
@@ -85,7 +89,15 @@ class index extends Component {
                 }
             })
         }else{
-            Toast.info("跳转",2,null,false);
+            if(res.isMake){
+                Toast.info("该模块暂未开发，请等待！",2,null,false);
+                return false;
+            }
+            this.props.history.push({
+                pathname:res.path,
+                state:{}
+            })
+            // Toast.info("跳转",2,null,false);
         }
     }
     
@@ -99,6 +111,12 @@ class index extends Component {
         }else{
             return (<div> 现在去登录</div>)
         }
+    }
+
+    goSetting(){
+        this.props.history.push({
+            pathname:"/setting"
+        })
     }
 
     render() {
@@ -120,7 +138,7 @@ class index extends Component {
                         </div>
                     </div>
                     <div className="user-info-right">
-                        <span className="iconfont icon-shezhi"></span>
+                        <span onClick={() => this.goSetting()} className="iconfont icon-shezhi"></span>
                     </div>
                 </div>
                 <div className="h-line-5"></div>

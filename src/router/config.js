@@ -54,6 +54,10 @@ export const otherRouterMap = [
         path:"/searResult/:keycode",
         name:"搜索结果",
         component:_import_views("searArticle/searResult")
+    },{
+        path:"/setting",
+        name:"设置",
+        component:_import_views("user/setting")
     }
 ];
 
